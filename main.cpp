@@ -1,101 +1,74 @@
 #include <iostream>
 #include <cstring>
 #include "Alumno.h"
-
+#include "AlumnoArchivo.h"
 using namespace std;
 
 void menuInscripciones();
 
 int main() {
-    menuInscripciones();
-    return 0;
-}
-
-void menuInscripciones() {
     int opcion;
-    AlumnoArchivo arch;
 
     do {
-        cout << "----- MENU INSCRIPCIONES -----" << endl;
+        cout << "===================================" << endl;
+        cout << "     SISTEMA DE GESTION ESCOLAR    " << endl;
+        cout << "===================================" << endl;
+        cout << "1. Inscripciones" << endl;
+        cout << "2. Gestiones académicas" << endl;
+        cout << "3. Personal académico" << endl;
+        cout << "4. Búsquedas" << endl;
+        cout << "5. Reportes" << endl;
+        cout << "6. Configuración" << endl;
+        cout << "0. Salir" << endl;
+        cout << "Seleccione una opción: ";
+        cin >> opcion;
+
+        switch(opcion) {
+        case 1:
+            menuInscripciones(); 
+            break;
+        // demás casos omitidos por simplicidad
+        case 0:
+            cout << "Gracias por usar el sistema." << endl;
+            break;
+        default:
+            cout << "Opción inválida." << endl;
+        }
+
+        system("pause");
+        system("cls");
+
+    } while (opcion != 0);
+
+    return 0;
+}
+void menuInscripciones() {
+    AlumnoArchivo arch;
+    int opcion;
+
+    do {
+        cout << "--- SUBMENU DE INSCRIPCIONES ---" << endl;
         cout << "1. Registrar nuevo estudiante" << endl;
-        cout << "2. Reinscripcion de alumno antiguo" << endl;
-        cout << "3. Consultar estado de inscripcion" << endl;
+        cout << "2. Reinscripción de alumno antiguo" << endl;
+        cout << "3. Consultar estado de inscripción" << endl;
         cout << "4. Lista de inscriptos por curso" << endl;
-        cout << "0. Volver al menu principal" << endl;
-        cout << "Opcion: ";
+        cout << "0. Volver al menú principal" << endl;
+        cout << "Seleccione una opción: ";
         cin >> opcion;
 
         switch(opcion) {
         case 1: {
             Alumno nuevo;
-            nuevo.cargar();  // heredaría carga desde Persona + propios campos de Alumno
-            if (arch.guardar(nuevo)) {
-                cout << "Alumno registrado correctamente." << endl;
-            } else {
-                cout << "Error al guardar el alumno." << endl;
-            }
+            nuevo.cargar();
+            arch.guardar(nuevo);
             break;
         }
-        case 2: {
-            int dni;
-            cout << "Ingrese DNI del alumno a reinscribir: ";
-            cin >> dni;
-            int pos = arch.buscarPorDNI(dni);
-            if (pos >= 0) {
-                Alumno a = arch.leer(pos);
-                cout << "Alumno encontrado:" << endl;
-                a.mostrar();
-                cout << "--- Ingrese nuevos datos para reinscripcion ---" << endl;
-                a.cargar();  // se vuelve a cargar con nuevos datos
-                if (arch.modificar(a, pos)) {
-                    cout << "Reinscripcion exitosa." << endl;
-                } else {
-                    cout << "Error al reinscribir." << endl;
-                }
-            } else {
-                cout << "Alumno no encontrado." << endl;
-            }
-            break;
-        }
-        case 3: {
-            int dni;
-            cout << "Ingrese DNI del alumno: ";
-            cin >> dni;
-            int pos = arch.buscarPorDNI(dni);
-            if (pos >= 0) {
-                Alumno a = arch.leer(pos);
-                cout << "Estado de inscripcion: ";
-                cout << (a.getEstado() ? "Activa" : "Inactiva") << endl;
-            } else {
-                cout << "Alumno no encontrado." << endl;
-            }
-            break;
-        }
-        case 4: {
-            int curso;
-            cout << "Ingrese codigo de curso: ";
-            cin >> curso;
-
-            int cantidad = arch.getCantidadRegistros();
-            int contador = 0;
-
-            for (int i = 0; i < cantidad; i++) {
-                Alumno a = arch.leer(i);
-                if (a.getCodigoCurso() == curso && a.getEstado()) {
-                    a.mostrar();
-                    cout << "------------------------" << endl;
-                    contador++;
-                }
-            }
-
-            cout << "Total de inscriptos en el curso " << curso << ": " << contador << endl;
-            break;
-        }
+        
         case 0:
-            cout << "Volviendo al menu principal..." << endl;
+            cout << "Volviendo al menú principal..." << endl;
             break;
         default:
-            cout << "Opcion invalida. Intente de nuevo." << endl;
+            cout << "Opción inválida." << endl;
         }
 
         system("pause");
