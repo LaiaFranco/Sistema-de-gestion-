@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include "Alumno.h"
+#include "AlumnoArchivo.h"
+
 using namespace std;
 
 void menuInscripciones();
