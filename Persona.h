@@ -8,7 +8,7 @@ class Persona{
 
 public:
     Persona();
-    Persona(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad, string numTelefono, string direccion,string mail, const Fecha& fechaNac);
+    Persona(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad, string numTelefono, string direccion,string mail,bool estado, const Fecha& fechaNac);
 
     void setTipoDocumento(int  tipoDocumento);
     void setNumDocumento(string numDocumento);

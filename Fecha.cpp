@@ -21,7 +21,6 @@ Fecha::Fecha(int dia, int mes, int anio){
 
 }
 
-
 void Fecha::setDia(int dia){
     _dia = dia;
 }
@@ -70,5 +69,15 @@ bool Fecha::ValidarFecha(int dia, int mes, int anio){
             return dia >=1 && dia <=31;          }
 }
 
+void Fecha::Cargar(){
+    cout<<"DIA: ";
+    cin>>_dia;
+    cout<<"MES: ";
+    cin>>_mes;
+    cout<<"ANIO: ";
+    cin>>_anio;
+}
 
-
+void Fecha::Mostrar(){
+    cout<<getDia()<<"/"<<getMes()<<"/"<<getAnio()<<endl;
+}

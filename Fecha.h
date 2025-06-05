@@ -18,6 +18,9 @@ public:
     bool EsBiciesto(int anio);
     bool ValidarFecha(int dia, int mes, int anio);
 
+    void Cargar();
+    void Mostrar();
+
 
 
 private:

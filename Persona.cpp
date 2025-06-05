@@ -98,7 +98,7 @@ string Persona::getMail(){
 bool Persona::getEstado(){
     return _estado;
 }
-Fecha getFechaNac(){
+Fecha Persona:: getFechaNac(){
     return _fechaNac;
 }
 
@@ -109,7 +109,7 @@ void Persona::Cargar(){
     cout<<endl;
     cout<<"NUMERO: ";
     cin>>_numDocumento;
-    cout>>endl;
+    cout<<endl;
     cout<<"NOMBRES: ";
     cin.ignore();
     cin.getline(_nombres,50);
@@ -121,6 +121,8 @@ void Persona::Cargar(){
     cout<<"EDAD: ";
     cin>>_edad;
     cout<<endl;
+    cout<<"FECHA NACIMIENTO: ";
+    _fechaNac.Cargar();
     cout<<"NUMERO DE TELEFONO: " ;
     cin.ignore();
     cin.getline(_numTelefono,15);
@@ -138,6 +140,17 @@ void Persona::Cargar(){
 }
 
 
+void Persona::Mostrar(){
+    cout<<"TIPO DE DOCUMENTO: "<<getTipoDocumento()<<endl;
+    cout<<"NUMERO DE DOCUMENTO: "<<getNumeroDocumento()<<endl;
+    cout<<"NOMBRES: "<<getNombres()<<endl;
+    cout<<"APELLIDOS: "<<getApellidos()<<endl;
+    cout<<"EDAD: "<<getEdad()<<endl;
+    cout<<"FECHA DE NACIMIENTO: ";
+    _fechaNac.Mostrar();
+    cout<<"MAIL: " <<getMail()<<endl;
+    cout<<"ESTADO: " <<getEstado()<<endl;
+}
 
 
 
