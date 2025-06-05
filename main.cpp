@@ -2,6 +2,8 @@
 #include <cstring>
 #include "Alumno.h"
 #include "AlumnoArchivo.h"
+#include "Persona.h"
+#include "Fecha.h"
 
 using namespace std;
 
