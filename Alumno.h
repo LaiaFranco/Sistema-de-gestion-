@@ -1,25 +1,38 @@
-
 #include<iostream>
 #pragma once
-#include "Fecha.h"
-
 #include "Persona.h"
 
-class Alumno : public Persona {
-private:
-    int _codigoCurso;
-    bool _estado;
-    float _deuda;
-
+using namespace std;
+class Alumno: public Persona{
 public:
-    void setCodigoCurso(int c);
-    void setEstado(bool e);
-    void setDeuda(float d);
+    Alumno();
+    Alumno(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado,const Fecha& fechaNac,int legajoAlumno, bool nivelAcademico, int anioAcademico, string tutor, string nombreTutor, string apellidoTutor, bool tieneHermanos);
 
-    int getCodigoCurso();
-    bool getEstado();
-    float getDeuda();
+    void setLegajoAlumno(int legajoAlumno);
+    void setNivelAcademico(bool nivelAcademico);
+    void setAnioAcademico(int anioAcademico);
+    void setTutor(string tutor);
+    void setNombreTutor(string nombreTutor);
+    void setApellidoTutor(string apellidoTutor);
+    void setTieneHermanos(bool tieneHermanos);
 
-    void cargar();
-    void mostrar();
+    int getLegajoAlumno();
+    bool getNivelAcademico();
+    int getAnioAcademico();
+    string getTutor();
+    string getNombreTutor();
+    string getApellidoTutor();
+    bool getTieneHermanos();
+
+    void Cargar();
+    void Mostrar();
+
+private:
+    int _legajoAlumno;
+    bool _nivelAcademico; ///primario o secundario
+    int _anioAcademico; ///de 1 a 6 para primaria y secundario
+    char _tutor[10]; ///mama, papa, perro o gato
+    char _nombreTutor[30];
+    char _apellidoTutor[30];
+    bool _tieneHermanos;
 };
