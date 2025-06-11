@@ -1,0 +1,201 @@
+#include "ArchivoAlumno.h"
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+ArchivoAlumno::ArchivoAlumno(const char *nombre){
+    strcpy(_nombreArchivo,nombre);
+    _tamanioRegistro = sizeof(Alumno);
+}
+int ArchivoAlumno::CantidadRegistros(){
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+            return 0;
+    }
+    fseek(pAlumno,0,SEEK_END); //ubica el puntero en lo ultimo del archivo
+    int tam= ftell(pAlumno);
+
+    int CantidadRegistros = tam/_tamanioRegistro;
+    return CantidadRegistros;
+}
+
+bool ArchivoAlumno::agregarAlumno(Alumno reg){
+    int escribio;
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"ab");
+    if(pAlumno == nullptr){
+        return -1;
+    }
+
+    escribio = fwrite(&reg,_tamanioRegistro,1,pAlumno);
+
+    pclose(pAlumno);
+    return escribio;
+}
+
+void ArchivoAlumno::listarRegistros(){
+    Alumno reg;
+    FILE *pAlumno;
+
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno==nullptr){
+        cout<<"ERROR DE ARCHIVO"<<endl;
+    }
+
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getEstado()){
+            reg.Mostrar();
+        }
+    }
+
+    fclose(pAlumno);
+}
+
+void ArchivoAlumno::listarInactivos(){
+    Alumno reg;
+    FILE *pAlumno;
+
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+        cout<<"ERROR EN EL ARCHIVO"<<endl;
+    }
+
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getEstado()==0){
+            reg.Mostrar();
+        }
+    }
+
+    fclose(pAlumno);
+}
+
+void ArchivoAlumno::listarAlumnoEspecifico(Alumno registro){
+    FILE *pAlumno;
+
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno==nullptr){
+        cout<<"ERROR EN EL ARCHIVO"<<endl;
+    }
+
+    int leer= fread(&registro,_tamanioRegistro,1,pAlumno);
+    if(leer==1){
+        registro.Mostrar();
+    }
+
+    fclose(pAlumno);
+}
+
+int ArchivoAlumno::buscarAlumno(string dni){
+     Alumno reg;
+    int posicion=0;
+
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+        ///cout<<"ERROR DE ARCHIVO"<<endl;
+        return -2;
+    }
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getNumeroDocumento()== dni){
+            fclose(pAlumno);
+            return posicion;
+        }
+        posicion++;
+    }
+    fclose(pAlumno);
+    return -1;
+}
+
+int ArchivoAlumno::buscarAlumno(int legajo){
+     Alumno reg;
+    int posicion=0;
+
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+       /// cout<<"ERROR DE ARCHIVO"<<endl;
+       return -1;
+    }
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getLegajoAlumno()== legajo){
+            fclose(pAlumno);
+            return posicion;
+        }
+        posicion++;
+    }
+    fclose(pAlumno);
+    return -1;
+}
+
+int ArchivoAlumno::buscarAlumno(const char* apellido){
+     Alumno reg;
+    int posicion=0;
+
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+       /// cout<<"ERROR DE ARCHIVO"<<endl;
+       return -1;
+    }
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getApellidos()== apellido){
+            fclose(pAlumno);
+            return posicion;
+        }
+        posicion++;
+    }
+    fclose(pAlumno);
+    return -1;
+}
+
+
+Alumno ArchivoAlumno::leerAlumno(int pos){
+    FILE *pArchivo;
+    pArchivo = fopen(_nombreArchivo,"rb");
+    if(pArchivo== nullptr){
+        return Alumno();
+    }
+    Alumno reg;
+    fseek(pArchivo,_tamanioRegistro*pos,SEEK_END);
+    fread(&reg,_tamanioRegistro,1,pArchivo);
+
+    fclose(pArchivo);
+    return reg;
+}
+
+bool ArchivoAlumno::modificarAlumno(const Alumno &reg, int pos){
+    FILE *pArchivo;
+    pArchivo = fopen(_nombreArchivo,"rb+");
+    if(pArchivo==nullptr){
+        return -1;
+    }
+    fseek(pArchivo,pos*_tamanioRegistro,0);
+    bool escribio = fwrite(&reg,_tamanioRegistro,1,pArchivo);
+
+    fclose(pArchivo);
+    return escribio;
+}
+
+bool ArchivoAlumno::bajaLogica(string dni){
+    Alumno reg;
+    ArchivoAlumno archi;
+    int pos=archi.buscarAlumno(dni);
+    if(pos==-1) return false;
+    ///leer el registro del archivo
+    reg = archi.leerAlumno(pos);///en reg tengo el registro a borrar
+    reg.setEstado(false);
+    return archi.modificarAlumno(reg,pos);
+}
+
+bool ArchivoAlumno::altaLogica(string dni){
+    Alumno reg;
+    ArchivoAlumno archi;
+    int pos=archi.buscarAlumno(dni);
+    if(pos==-1) return false;
+    ///leer el registro del archivo
+    reg = archi.leerAlumno(pos);///en reg tengo el registro a borrar
+    reg.setEstado(true);
+    return archi.modificarAlumno(reg,pos);
+}

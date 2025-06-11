@@ -2,12 +2,14 @@
 #include <cstring>
 #include "Persona.h"
 #include "Fecha.h"
+#include "MenuBusquedas.h"
 
 using namespace std;
 
 void menuInscripciones();
 
 int main() {
+    MenuBusqueda menBusq;
     cout << "================================================================================="<<endl;
     cout<<"                     BIENVENIDOS AL SISTEMA DE GESTION ESCOLAR       "<<endl;
     cout << "================================================================================="<<endl;
@@ -38,6 +40,7 @@ int main() {
         case 3:
             break;
         case 4:
+           menBusq.MenuBusquedas();
             break;
         case 5:
             break;

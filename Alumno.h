@@ -1,5 +1,5 @@
-#include<iostream>
 #pragma once
+#include<iostream>
 #include "Persona.h"
 
 using namespace std;
@@ -24,7 +24,8 @@ public:
     string getApellidoTutor();
     bool getTieneHermanos();
 
-    void Cargar();
+
+    bool Cargar(char* nuevoDni = (char*) "NADA");
     void Mostrar();
 
 private:
@@ -35,4 +36,5 @@ private:
     char _nombreTutor[30];
     char _apellidoTutor[30];
     bool _tieneHermanos;
+
 };

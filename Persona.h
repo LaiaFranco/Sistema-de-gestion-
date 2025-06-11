@@ -32,8 +32,8 @@ public:
     bool getEstado();
     Fecha getFechaNac();
 
-    void Mostrar();
-    void Cargar();
+    void MostrarTipoDocumento(int tipodocumento);
+    bool ValiadarFormatoDni(const char *dni);
 
 private:
     int  _tipoDocumento;
