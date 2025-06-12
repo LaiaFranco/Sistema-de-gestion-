@@ -66,7 +66,7 @@ void Persona::setEstado(bool estado){
 }
 
 
-void Persona::setFechaNac(const Fecha& fechaNac){
+void Persona::setFechaNac(const Fecha &fechaNac){
     _fechaNac = fechaNac;
 }
 
@@ -102,8 +102,8 @@ Fecha Persona:: getFechaNac(){
     return _fechaNac;
 }
 
-bool Persona::ValiadarFormatoDni(const char *dni){
-   if(strlen(dni)==8){
+bool Persona::ValiadarFormatoDni(string dni){
+   if(dni.size() == 8){
        return 1;
    }else {
        return 0;

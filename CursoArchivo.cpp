@@ -2,6 +2,7 @@
 #include <cstring>
 #include "CursoArchivo.h"
 
+using namespace std;
 CursoArchivo::CursoArchivo(const char* nombre) {
     strncpy(_nombreArchivo, nombre, 29);
     _nombreArchivo[29] = '\0';
@@ -15,7 +16,7 @@ bool CursoArchivo::guardar(Curso reg) {
     return ok;
 }
 
-Curso CursoArchivo::leer(int pos) {
+Curso CursoArchivo::leer(int pos){
     Curso reg;
     FILE* p = fopen(_nombreArchivo, "rb");
     if (p == nullptr) return reg;
@@ -25,7 +26,7 @@ Curso CursoArchivo::leer(int pos) {
     return reg;
 }
 
-int CursoArchivo::getCantidadRegistros() {
+int CursoArchivo::CantidadRegistros() {
     FILE* p = fopen(_nombreArchivo, "rb");
     if (p == nullptr) return 0;
     fseek(p, 0, SEEK_END);
@@ -34,13 +35,13 @@ int CursoArchivo::getCantidadRegistros() {
     return bytes / sizeof(Curso);
 }
 
-int CursoArchivo::buscarPorCodigo(int codigo) {
+int CursoArchivo::buscarPorIdCurso(int id){
     Curso reg;
-    FILE* p = fopen(_nombreArchivo, "rb");
+    FILE * p = fopen(_nombreArchivo, "rb");
     if (p == nullptr) return -1;
     int pos = 0;
     while (fread(&reg, sizeof(Curso), 1, p) == 1) {
-        if (reg.getCodigo() == codigo) {
+        if (reg.getIdCurso() == id){
             fclose(p);
             return pos;
         }
@@ -50,11 +51,31 @@ int CursoArchivo::buscarPorCodigo(int codigo) {
     return -1;
 }
 
-bool CursoArchivo::modificar(Curso reg, int pos) {
+bool CursoArchivo::modificar(const Curso &reg, int pos) {
     FILE* p = fopen(_nombreArchivo, "rb+");
     if (p == nullptr) return false;
     fseek(p, pos * sizeof(Curso), SEEK_SET);
     bool ok = fwrite(&reg, sizeof(Curso), 1, p);
     fclose(p);
     return ok;
+}
+
+bool CursoArchivo::bajaLogica(int id){
+    Curso reg;
+    int pos = buscarPorIdCurso(id);
+    if(pos==-1) return false;
+    ///leer el registro del archivo
+    reg = leer(pos);///en reg tengo el registro a borrar
+    reg.setEstado(false);
+    return modificar(reg,pos);
+}
+
+bool CursoArchivo::altaLogica(int id){
+    Curso reg;
+    int pos = buscarPorIdCurso(id);
+    if(pos==-1) return false;
+    ///leer el registro del archivo
+    reg = leer(pos);///en reg tengo el registro a borrar
+    reg.setEstado(true);
+    return modificar(reg,pos);
 }

@@ -6,6 +6,7 @@ using namespace std;
 
 ArchivoAlumno::ArchivoAlumno(const char *nombre){
     strcpy(_nombreArchivo,nombre);
+    _nombreArchivo[29] = '\0';
     _tamanioRegistro = sizeof(Alumno);
 }
 int ArchivoAlumno::CantidadRegistros(){
@@ -28,7 +29,6 @@ bool ArchivoAlumno::agregarAlumno(Alumno reg){
     if(pAlumno == nullptr){
         return -1;
     }
-
     escribio = fwrite(&reg,_tamanioRegistro,1,pAlumno);
 
     pclose(pAlumno);

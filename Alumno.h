@@ -1,9 +1,10 @@
 #pragma once
-#include<iostream>
 #include "Persona.h"
+#include<iostream>
 
 using namespace std;
 class Alumno: public Persona{
+
 public:
     Alumno();
     Alumno(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado,const Fecha& fechaNac,int legajoAlumno, bool nivelAcademico, int anioAcademico, string tutor, string nombreTutor, string apellidoTutor, bool tieneHermanos);
@@ -25,7 +26,7 @@ public:
     bool getTieneHermanos();
 
 
-    bool Cargar(char* nuevoDni = (char*) "NADA");
+    bool Cargar(int legajo);
     void Mostrar();
 
 private:

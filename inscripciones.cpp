@@ -1,43 +1,47 @@
 #include "Alumno.h"
 #include "inscripciones.h"
-#include "ArchivoAlumno.h"
 #include <iostream>
 #include <cstring>
 
-
 using namespace std;
 
-inscripcion::inscripcion(){
+inscripcion::inscripcion()
+:_fechaInscripcion(1,1,2023){
 
+    _idInscripcion = 0;
     _legajoAlumno=0;
-    _numeroCurso=0;
+    _idCurso=0;
     _importeMatricula=0.0;
     _adeudaMatricula=false;
-
+    _estado = false;
 }
 
 
-inscripcion::inscripcion(int legajoAlumno, int numeroCurso, float importeMatricula,bool adeudaMatricula, Fecha fechaInscripcion)
+inscripcion::inscripcion(int idInscripcion,int legajoAlumno,int id,  int numeroCurso, float importeMatricula, bool adeudaMatricula,bool estado,Fecha fechaInscripcion){
 
+  _idInscripcion = idInscripcion;
   _legajoAlumno=legajoAlumno;
-  _numeroCurso=numeroCurso;
+  _idCurso = id;
   _importeMatricula=importeMatricula;
   _adeudaMatricula=adeudaMatricula;
+  _estado = estado;
+}
 
+void inscripcion::setIdInscripcion(int idInscripcion){
+    _idInscripcion = idInscripcion;
+}
 
-
-void legajoAlumno::setlegajoAlumno(int legajoAlumno){
+void inscripcion::setlegajoAlumno(int legajoAlumno){
      _legajoAlumno=legajoAlumno;
 
 }
 
-void numeroCurso::setnumeroCurso(int numeroCurso){
+void inscripcion::setIdCurso(int id){
 
-    _numeroCurso=numeroCurso;
-
+    _idCurso =id;
 }
 
-void importeMatricula::setimporteMatricula(float importeMatricula){
+void inscripcion::setimporteMatricula(float importeMatricula){
 
   _importeMatricula=importeMatricula;
 
@@ -49,110 +53,62 @@ void inscripcion::setadeudaMatricula(bool adeudaMatricula){
 
 }
 
-void inscripcion::fechaInscripcion(fecha fechaInscripcion){
-
-   _fechaInscripcion=fechaInscripcion;
+void inscripcion::setEstado(bool estado){
+    _estado = estado;
 }
 
+void inscripcion::setfechaInscripcion(Fecha fechaInscripcion){
 
-int legajoAlumno::getlegajoAlumno(){
+   _fechaInscripcion = fechaInscripcion;
+}
 
+int inscripcion::getIdInscripcion(){
+    return _idInscripcion;
+}
+
+int inscripcion::getlegajoAlumno(){
    return _legajoAlumno;
 }
 
 
-int numeroCurso::getnumeroCurso(){
-
-   return _numeroCurso;
+int inscripcion::getIdCurso(){
+   return _idCurso;
 }
 
-float importeMatricula::getimporteMatricula(){
-
+float inscripcion::getimporteMatricula(){
     return _importeMatricula;
 
 }
 
-bool adeudaMatricula::getadeudaMatricula(){
+bool inscripcion::getadeudaMatricula(){
 
   return _adeudaMatricula;
 
 }
+bool inscripcion::getEstado(){
+    return _estado;
+}
 
-fecha fechaInscripcion::getfechaInscripcion(){
-
+Fecha inscripcion::getfechaInscripcion(){
    return _fechaInscripcion;
-
 }
 
-
-void inscripcion::cargar(){
- cout<< "Legajo del Alumno: "<<endl;
- cin>>_legajoAlumno;
-
- cout<<"Numero de Curso: "<<endl;
- cin>>_numeroCurso;
-
-  if (_numeroCurso <= 0) {
-    cout << "Numero de curso invalido. Intente nuevamente." << endl;
-  }
- cin>>_numeroCurso;
-
- cout << "Fecha de inscripcion: " << endl;
-
-
- cout<<"Importe de Matricula: "<<endl;
- cin>>_importeMatricula;
-
- cout<< "Alumno adeuda matricula?(1.Si 2.No)"<<endl;
- cin>> _adeudaMatricula;
-
- _fechaInscripcion.Cargar();
-
-
-}
-
-void inscripcion::mostrar(){
-
-  cout<< "legajo del Alumno: " <<_legajoAlumno << endl;
-
-  cout<< "Numero de Curso: "<< _numeroCurso << endl;
-
-
-  cout<< "Importe de Matricula: "<< _importeMatricula << endl;
-
-  if(adeudaMatricula==false){
+void inscripcion::Mostrar(){
+   cout<<"Id de inscripcion: " <<_idInscripcion<<endl;
+   cout<< "legajo del Alumno: " <<_legajoAlumno << endl;
+   cout<< "Id de Curso: "<< _idCurso << endl;
+   cout<< "Importe de Matricula: "<< _importeMatricula << endl;
+    if(_adeudaMatricula == 1){
 
     cout<<"El alumno no adeuda la matricula"<< endl;
-  }
-  else {
-
+    }
+    else {
     cout<<"El alumno adeuda la matricula"<< endl;
-  }
-
- fechaInscripcion.Mostrar();
-
-
+    }
+    cout<<"Estado: "<<_estado;
+    cout<<"Fecha de inscripcion: ";
+    _fechaInscripcion.Mostrar();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

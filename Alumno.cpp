@@ -1,6 +1,4 @@
 #include "Alumno.h"
-#include "Persona.h"
-#include "ArchivoAlumno.h"
 #include <iostream>
 #include <cstring>
 
@@ -81,54 +79,33 @@ bool Alumno::getTieneHermanos(){
     return _tieneHermanos;
 }
 
+bool Alumno::Cargar(int legajo){
 
-
-bool Alumno::Cargar(char* nuevoDni){
-    ArchivoAlumno archiALu;
-    Persona per;
-
-     if(strcmp(nuevoDni,"NADA")==0 && ValiadarFormatoDni(nuevoDni)==1){
-            cout<<"INGRESE DNI: ";
-            cin>>nuevoDni;
-            per.setNumDocumento(nuevoDni);
-            string numeroDni= per.getNumeroDocumento();
-            if(archiALu.buscarAlumno(numeroDni)>=0){
-                cout<<"YA EXISTE USUARIO CON ESTE NUMERO DNI."<<endl;
-                return false;
-            }
-        }
-        else{
-             per.setNumDocumento(nuevoDni);
-        }
     cout<<"-----DATOS PERSONALES-----"<<endl;
-    _legajoAlumno = archiALu.CantidadRegistros();
+    _legajoAlumno = legajo;
     cout<<"LEGAJO: "<<_legajoAlumno<<endl;
     int  tipoDocumento;
     cout<<"TIPO DE DOCUMENTO(1-DNI, 2-PASAPORTE, 3-LIBRETA CIVICA): ";
     cin>>tipoDocumento;
-    per.setTipoDocumento(tipoDocumento);
-    cout<<endl;
+    setTipoDocumento(tipoDocumento);
     string nombres;
     cout<<"NOMBRES: ";
     cin.ignore();
-    cin>>nombres;
-    per.setNombres(nombres);
-    cout<<endl;
+    getline(cin,nombres);
+    setNombres(nombres);
     string apellidos;
     cout<<"APELLIDOS: ";
     cin.ignore();
-    cin>>apellidos;
-    per.setApellidos(apellidos);
-    cout<<endl;
+    getline(cin,apellidos);
+    setApellidos(apellidos);
     int edad;
     cout<<"EDAD: ";
     cin>>edad;
-    per.setEdad(edad);
-    cout<<endl;
+    setEdad(edad);
     int dia;
     int mes;
     int anio;
-    cout<<"FECHA NACIMIENTO: ";
+    cout<<"===FECHA NACIMIENTO=== "<<endl;
     cout<<"DIA: ";
     cin>>dia;
     cout<<endl;
@@ -138,28 +115,26 @@ bool Alumno::Cargar(char* nuevoDni){
     cout<<"ANIO: ";
     cin>>anio;
     cout<<endl;
-    per.setFechaNac(Fecha(dia,mes,anio));
+    setFechaNac(Fecha(dia,mes,anio));
     string numTelefono;
     cout<<"NUMERO DE TELEFONO: " ;
     cin.ignore();
-    cin>>numTelefono;
-    per.setNumTelefono(numTelefono);
-    cout<<endl;
+    getline(cin,numTelefono);
+    setNumTelefono(numTelefono);
     string direccion;
     cout<<"DIRECCION: ";
     cin.ignore();
-    cin>>direccion;
-    per.setDireccion(direccion);
-    cout<<endl;
+    getline(cin,direccion);
+    setDireccion(direccion);
     string mail;
     cout<<"MAIL: ";
     cin.ignore();
-    cin>>mail;
-    per.setMail(mail);
+    getline(cin,mail);
+    setMail(mail);
     cout<<endl;
     bool estado=true ;
-    per.setEstado(estado);
-    cout<<"NIVEL ACDEMICO(0-Primario, 1-Secundario): ";
+    setEstado(estado);
+    cout<<"NIVEL ACADEMICO(0-Primario, 1-Secundario): ";
     cin>> _nivelAcademico;
     cout<<endl;
     cout<<"ANIO ACADEMICO(1-PRIMER,2-SEGUNDO,3-TERCERO,ETC): ";
@@ -168,37 +143,31 @@ bool Alumno::Cargar(char* nuevoDni){
     cout<<"TUTOR A CARGO(madre/padre/otro):";
     cin.ignore();
     cin.getline(_tutor,10);
-    cout<<endl;
     cout<<"NOMBRE TUTOR: ";
     cin.ignore();
     cin.getline(_nombreTutor,30);
-    cout<<endl;
     cout<<"APELLIDO TUTOR: " ;
     cin.ignore();
     cin.getline(_apellidoTutor,30);
-    cout<<endl;
     cout<<"TIENE HERMANOS?(1-SI, 0-NO):";
-    cout<<_tieneHermanos;
+    cin>>_tieneHermanos;
         return true;
 }
 
 void Alumno::Mostrar(){
-    Persona per;
+
     cout<<"-----DATOS PERSONALES-----"<<endl;
     cout<<"LEGAJO: "<<getLegajoAlumno()<<endl; ///terminarlo
     cout<<"TIPO DE DOCUMENTO: ";
-    per.MostrarTipoDocumento(getTipoDocumento());
+    MostrarTipoDocumento(getTipoDocumento());
     cout<<endl;
     cout<<"NOMBRES: "<<getNombres()<<endl;
     cout<<"APELLIDOS: "<<getApellidos()<<endl;
     cout<<"EDAD: "<<getEdad()<<endl;
     cout<<"FECHA NACIMIENTO: ";
-    per.getFechaNac();
-    cout<<endl;
+    getFechaNac().Mostrar();
     cout<<"NUMERO DE TELEFONO: "<<getNumTelefono()<<endl;
-    cout<<"DIRECCION: ";
-    per.getDireccion();
-    cout<<endl;
+    cout<<"DIRECCION: "<<getDireccion()<<endl;
     cout<<"MAIL: "<<getMail()<<endl;
     cout<<"NIVEL ACADEMICO(0-Primario, 1-Secundario): ";
     if(getNivelAcademico()==1){
@@ -218,7 +187,5 @@ void Alumno::Mostrar(){
     if(getEstado()){
         cout<<"ACTIVO"<<endl;
     }else{cout<<"INACTIVO"<<endl;}
-
-
 }
 

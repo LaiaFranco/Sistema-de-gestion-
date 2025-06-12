@@ -1,6 +1,5 @@
 #include "MenuBusquedas.h"
-#include "MenuBusquedaAlumno.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 void MenuBusqueda::MenuBusquedas(){
@@ -47,9 +46,7 @@ void MenuBusqueda::MenuBusquedas(){
         default:
             cout << "Opción inválida. Intente nuevamente." << endl;
         }
-
         system("pause");
-
     } while (opcion != 0);
 }
 

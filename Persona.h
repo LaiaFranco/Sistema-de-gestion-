@@ -19,7 +19,7 @@ public:
     void setDireccion(string direccion);
     void setMail (string mail);
     void setEstado(bool estado);
-    void setFechaNac(const Fecha& fechaNac);
+    void setFechaNac(const Fecha &fechaNac);
 
     int  getTipoDocumento();
     string getNumeroDocumento();
@@ -33,7 +33,7 @@ public:
     Fecha getFechaNac();
 
     void MostrarTipoDocumento(int tipodocumento);
-    bool ValiadarFormatoDni(const char *dni);
+    bool ValiadarFormatoDni( string dni);
 
 private:
     int  _tipoDocumento;
@@ -45,6 +45,8 @@ private:
     char _direccion[20];
     char _mail[50];
     bool _estado;
+
+protected:
     Fecha _fechaNac;
 
 

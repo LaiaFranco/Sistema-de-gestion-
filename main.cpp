@@ -1,15 +1,11 @@
+#include "MenuBusquedas.h"
+#include "MenuInscripciones.h"
 #include <iostream>
 #include <cstring>
-#include "Persona.h"
-#include "Fecha.h"
-#include "MenuBusquedas.h"
 
 using namespace std;
-
-void menuInscripciones();
-
 int main() {
-    MenuBusqueda menBusq;
+
     cout << "================================================================================="<<endl;
     cout<<"                     BIENVENIDOS AL SISTEMA DE GESTION ESCOLAR       "<<endl;
     cout << "================================================================================="<<endl;
@@ -34,12 +30,15 @@ int main() {
 
         switch(opcion) {
         case 1:
+            MenuInscripciones menIns;
+            menIns.menuInscripciones();
             break;
         case 2:
             break;
         case 3:
             break;
         case 4:
+           MenuBusqueda menBusq;
            menBusq.MenuBusquedas();
             break;
         case 5:

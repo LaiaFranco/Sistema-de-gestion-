@@ -7,7 +7,7 @@ class ArchivoAlumno{
 public:
     ArchivoAlumno(const char *nombre="Alumno.dat"); ///listo
     int CantidadRegistros(); ///listo
-    bool agregarAlumno(Alumno reg); ///listo
+    bool agregarAlumno(Alumno reg);
     void  listarRegistros();///listo, me va a listar todos los activos
     void  listarInactivos();///listo
     void listarAlumnoEspecifico(Alumno registro); ///listo
@@ -23,7 +23,4 @@ public:
 private:
    char _nombreArchivo[30];
    int _tamanioRegistro;
-
-
-
 };

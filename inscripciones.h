@@ -1,47 +1,38 @@
 #pragma once
+#include "AlumnoManager.h"
 #include<iostream>
-#include "Alumno.h"
-#include "Fecha.h"
-
-#include <cstring>
+#include <string>
 
 using namespace std;
-
-class inscripcion {
-
-
-private:
-
- int _legajoAlumno;
- int _numeroCurso;
- float _importeMatricula;
- bool _adeudaMatricula;
- Fecha fechaInscripcion;
-
-
+class inscripcion{
 public:
-
     inscripcion();
-    inscripcion(int legajoAlumno, int numeroCurso, float importeMatricula,adeudaMatricula, Fecha fechaInscripcion);
+    inscripcion(int idInscripcion,int legajoAlumno,int id,  int numeroCurso, float importeMatricula, bool adeudaMatricula,bool estado,Fecha fechaInscripcion);
 
-
+void setIdInscripcion(int idInscripcion);
 void setlegajoAlumno(int legajoAlumno);
-void setnumeroCurso(int numeroCurso);
+void setIdCurso(int id);
 void setimporteMatricula(float importeMatricula);
 void setadeudaMatricula(bool adeudaMatricula);
+void setEstado(bool estado);
 void setfechaInscripcion(Fecha fechaInscripcion);
 
+int getIdInscripcion();
 int getlegajoAlumno();
-int getnumeroCurso();
+int getIdCurso();
 float getimporteMatricula();
 bool getadeudaMatricula();
+bool getEstado();
 Fecha getfechaInscripcion();
 
-void mostrar();
-void cargar();
+void Mostrar();
 
+private:
+    int _idInscripcion;
+    int _legajoAlumno;
+    int _idCurso;
+    float _importeMatricula;
+    bool _adeudaMatricula;
+    bool _estado;
+    Fecha _fechaInscripcion;
 };
-
-
-
-

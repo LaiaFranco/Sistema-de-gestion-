@@ -1,6 +1,6 @@
 #pragma once
 #include "AlumnoManager.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 class MenuBusquedaAlumno{

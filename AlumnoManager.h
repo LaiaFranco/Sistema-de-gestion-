@@ -4,7 +4,9 @@
 
 class AlumnoManager{
 public:
-    void CargarAlumno();
+    bool ValidarDNI();
+    int IncrementarLegajo();
+    int CargarAlumno();
     void ListarAlumnosActivos();
     void buscarAlumnoPorLegajo(int legajo);
     void buscarAlumnoPorDNI(string dni);
@@ -12,7 +14,5 @@ public:
 
 private:
     ArchivoAlumno _archiALu;
-
-
 
 };

@@ -1,32 +1,45 @@
 #pragma once
 #include<iostream>
 #include <cstring>
+#include <string>
 
 using namespace std;
-
-class Curso {
-private:
-    int _codigo;
-    char _nombre[30];
-    char _turno[10];  // Ej: "mañana", "tarde"
-    int _vacantes;
-    bool _activo;
-
+class Curso{
 public:
     Curso();
+    Curso(int id,int numero, int numAula,string descripcion,bool turno,int cantMax,bool estado);
 
-    void setCodigo(int codigo);
-    void setNombre(const char* nombre);
-    void setTurno(const char* turno);
-    void setVacantes(int vacantes);
-    void setActivo(bool activo);
+    void setIdCursoo(int id);
+    void setNumeroCurso(int numero);
+    void setNumeroAula(int numAula);
+    void setNivelEducativo(bool nivel);
+    void setDescripcion(string descripcion);
+    void setTurno(bool turno);
+    void setCantidadMaximaAlumnos(int cantMax);
+    void setCantidadAlumnosInscriptos(int cantidad);
+    void setEstado(bool estado);
 
-    int getCodigo();
-    const char* getNombre();
-    const char* getTurno();
-    int getVacantes();
-    bool getActivo();
+    int getIdCurso();
+    int getNumeroCurso();
+    int getNumeroAula();
+    bool getNivelEducativo();
+    string getDescripcion();
+    bool getTurno();
+    int getCantidadMaximaAlumnos();
+    int getCantiadaAlumnosInscriptos();
+    bool getEstado();
 
     void Cargar();
     void Mostrar();
+
+private:
+    int _idCurso;
+    int _numeroCurso;
+    int _numeroAula;
+    bool _nivelEducativo;
+    char _descripcion[100];
+    bool _turno;  // EJ, turno maniana o tarde
+    int _cantMaximaAlumnos;
+    int _cantAlumnosInscriptos;
+    bool _estado;
 };
