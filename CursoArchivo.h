@@ -4,8 +4,7 @@
 using namespace std;
 class CursoArchivo {
 public:
-    CursoArchivo(const char* nombre = "cursos.dat");
-
+    CursoArchivo(const char* nombre = "Cursos.dat");
     bool guardar(Curso reg);
     Curso leer(int pos);
     int CantidadRegistros();

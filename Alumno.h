@@ -17,7 +17,7 @@ public:
     void setApellidoTutor(string apellidoTutor);
     void setTieneHermanos(bool tieneHermanos);
 
-    int getLegajoAlumno();
+    int getLegajoAlumno ();
     bool getNivelAcademico();
     int getAnioAcademico();
     string getTutor();
@@ -25,8 +25,6 @@ public:
     string getApellidoTutor();
     bool getTieneHermanos();
 
-
-    bool Cargar(int legajo);
     void Mostrar();
 
 private:

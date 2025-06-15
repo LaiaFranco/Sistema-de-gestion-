@@ -7,7 +7,7 @@
 using namespace std;
 class ArchivoInscripcion{
 public:
-    ArchivoInscripcion(const char *nombre="Inscripcion.dat");
+    ArchivoInscripcion();
     int CantidadRegistros();
     bool agregarInscripcion(const inscripcion &reg);
     void  listarIncripciones();

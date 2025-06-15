@@ -36,3 +36,4 @@ private:
     bool _estado;
     Fecha _fechaInscripcion;
 };
+

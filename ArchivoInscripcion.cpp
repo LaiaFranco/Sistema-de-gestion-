@@ -2,11 +2,13 @@
 #include <iostream>
 #include <string>
 using namespace std;
-ArchivoInscripcion::ArchivoInscripcion(const char *nombre){
+ArchivoInscripcion::ArchivoInscripcion(){
+    const char *nombre= "Inscripcion.dat";
     strcpy(_nombreArchivo,nombre);
     _nombreArchivo[29] = '\0';
     _tamanioRegistro = sizeof(inscripcion);
 }
+
 int ArchivoInscripcion::CantidadRegistros(){
     FILE *pInscripcion;
     pInscripcion = fopen(_nombreArchivo,"rb");
@@ -32,7 +34,7 @@ bool ArchivoInscripcion::agregarInscripcion(const inscripcion &reg){
     }
     escribio = fwrite(&reg,_tamanioRegistro,1,p);
 
-    pclose(p);
+    fclose(p);
     return escribio;
 }
 

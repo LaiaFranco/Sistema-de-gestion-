@@ -3,6 +3,7 @@
 #include "inscripciones.h"
 #include "Curso.h"
 #include "CursoArchivo.h"
+#include "Alumno.h"
 #include "AlumnoManager.h"
 #include <iostream>
 

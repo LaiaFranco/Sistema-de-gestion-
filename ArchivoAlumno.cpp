@@ -22,16 +22,16 @@ int ArchivoAlumno::CantidadRegistros(){
     return CantidadRegistros;
 }
 
-bool ArchivoAlumno::agregarAlumno(Alumno reg){
+bool ArchivoAlumno::agregarAlumno(const Alumno &reg){
     int escribio;
     FILE *pAlumno;
     pAlumno = fopen(_nombreArchivo,"ab");
     if(pAlumno == nullptr){
-        return -1;
+        return false;
     }
     escribio = fwrite(&reg,_tamanioRegistro,1,pAlumno);
 
-    pclose(pAlumno);
+    fclose(pAlumno);
     return escribio;
 }
 
@@ -150,6 +150,23 @@ int ArchivoAlumno::buscarAlumno(const char* apellido){
     return -1;
 }
 
+string  ArchivoAlumno::ValidarDni(){
+    Alumno alu;
+    string dni;
+    string mensaje = "YA EXISTE ESE DNI";
+    cout<<"INGRESAR DNI: ";
+    cin.ignore();
+    getline(cin,dni,'\n');
+            for(int i=0; i< CantidadRegistros();i++){
+                    alu = leerAlumno(i) ;
+            if(alu.getNumeroDocumento()== dni){
+                return mensaje;
+                break;
+            }
+            }
+        return dni;
+}
+
 
 Alumno ArchivoAlumno::leerAlumno(int pos){
     FILE *pArchivo;
@@ -158,7 +175,7 @@ Alumno ArchivoAlumno::leerAlumno(int pos){
         return Alumno();
     }
     Alumno reg;
-    fseek(pArchivo,_tamanioRegistro*pos,SEEK_END);
+    fseek(pArchivo,_tamanioRegistro*pos,SEEK_SET);
     fread(&reg,_tamanioRegistro,1,pArchivo);
 
     fclose(pArchivo);

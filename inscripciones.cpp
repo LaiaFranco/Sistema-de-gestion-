@@ -109,6 +109,3 @@ void inscripcion::Mostrar(){
     cout<<"Fecha de inscripcion: ";
     _fechaInscripcion.Mostrar();
 }
-
-
-

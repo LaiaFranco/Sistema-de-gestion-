@@ -1,12 +1,12 @@
 #pragma once
 #include "Alumno.h"
 #include "ArchivoAlumno.h"
+#include "string"
 
 class AlumnoManager{
 public:
-    bool ValidarDNI();
     int IncrementarLegajo();
-    int CargarAlumno();
+    Alumno CargarAlumno();
     void ListarAlumnosActivos();
     void buscarAlumnoPorLegajo(int legajo);
     void buscarAlumnoPorDNI(string dni);

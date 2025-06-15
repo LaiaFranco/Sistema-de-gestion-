@@ -32,9 +32,7 @@ void Persona::setTipoDocumento(int tipoDocumento){
 }
 
 void Persona::setNumDocumento(string numDocumento){
-   if(numDocumento.size()<=8){
    strcpy(_numDocumento,numDocumento.c_str());
-   }
 }
 
 void Persona::setNombres(string nombres){
@@ -80,6 +78,7 @@ string Persona::getNumeroDocumento(){
 string Persona::getNombres(){
     return _nombres;
 }
+
 string Persona::getApellidos(){
     return _apellidos;
 }
