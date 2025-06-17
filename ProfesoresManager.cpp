@@ -5,13 +5,13 @@
 
 using namespace std;
 bool ProfesoresManager::ValidarDNI(){
-    profesores prof;
+    Profesores prof;
     std::string nuevoDni;
             cout<<"INGRESE DNI(sin puntos): ";
             cin>>nuevoDni;
             for(int i=0; i<_archiProf.CantidadRegistros();i++){
-                    alu = _archiProf.leerProfesor(i);
-            if(alu.getNumeroDocumento()== nuevoDni && prof.ValiadarFormatoDni(nuevoDni)){
+                    prof = _archiProf.leerProfesor(i);
+            if(prof.getNumeroDocumento()== nuevoDni && prof.ValiadarFormatoDni(nuevoDni)){
                 return true;
             }else {return false; }
             }
@@ -24,10 +24,10 @@ int ProfesoresManager::IncrementarLegajo(){
 }
 
 int ProfesoresManager::CargarProfesor(){
-    profesores reg;
+    Profesores reg;
 
     if(!ValidarDNI()){
-        reg.Cargar(IncrementarLegajo());
+        reg.cargar(IncrementarLegajo());
     if((_archiProf.agregarProfesor(reg))){
         cout<<"SE GUARDO CORRECTAMENTE" <<endl;
         return reg.getLegajoProfesor();
@@ -42,34 +42,34 @@ int ProfesoresManager::CargarProfesor(){
 }
 
 void ProfesoresManager::buscarProfesorPorLegajo(int legajo){
-    profesores reg;
+    Profesores reg;
     int posicion;
     posicion = _archiProf.buscarProfesor(legajo);
     reg = _archiProf.leerProfesor(posicion);
-    reg.Mostrar();
+    reg.mostrar();
 }
 
 void ProfesoresManager::buscarProfesorPorDNI(std::string dni){
-    profesores reg;
+    Profesores reg;
     int posicion;
     posicion = _archiProf.buscarProfesor(dni);
     reg = _archiProf.leerProfesor(posicion);
-    reg.Mostrar();
+    reg.mostrar();
 }
 void ProfesoresManager::buscarProfesorPorApellido(const char *apellido){
-    profesores reg;
+    Profesores reg;
     int posicion;
     for(int i = 0;i < _archiProf.CantidadRegistros();i++){
         posicion = _archiProf.buscarProfesor(apellido);
         reg = _archiProf.leerProfesor(posicion);
         if(reg.getEstado()== true){
-                reg.Mostrar();
+                reg.mostrar();
         }
     }
 }
 
 void ProfesoresManager::ListarProfesoresActivos(){
-    profesores reg;
+    Profesores reg;
 
     cout<<"------ALUMNOS ACTIVOS-------"<<endl;
     _archiProf.listarRegistros();

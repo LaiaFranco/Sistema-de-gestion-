@@ -1,13 +1,14 @@
 #include"Profesores.h"
+#include"ArchivoProfesores.h"
+#include <cstring>
 #include<iostream>
 #include<cstdlib>
 
-using namespace std;
 
 ArchivoProfesores::ArchivoProfesores(const char *nombre){
     strcpy(_nombreArchivo,nombre);
     _nombreArchivo[29] = '\0';
-    _tamanioRegistro = sizeof(profesores);
+    _tamanioRegistro = sizeof(Profesores);
 }
 int ArchivoProfesores::CantidadRegistros(){
     FILE *pProfesores;
@@ -15,14 +16,14 @@ int ArchivoProfesores::CantidadRegistros(){
     if(pProfesores== nullptr){
             return 0;
     }
-    fseek(pProfesores,0,SEEK_END); 
-    int tam= ftell(pAlumno);
+    fseek(pProfesores,0,SEEK_END);
+    int tam= ftell(pProfesores);
 
     int CantidadRegistros = tam/_tamanioRegistro;
     return CantidadRegistros;
 }
 
-bool ArchivoProfesores::agregarProfesor(Alumno reg){
+bool ArchivoProfesores::agregarProfesor(Profesores reg){
     int escribio;
     FILE *pProfesor;
     pProfesor = fopen(_nombreArchivo,"ab");
@@ -36,7 +37,7 @@ bool ArchivoProfesores::agregarProfesor(Alumno reg){
 }
 
 void ArchivoProfesores::listarRegistros(){
-    profesores reg;
+    Profesores reg;
     FILE *pProfesor;
 
     pProfesor = fopen(_nombreArchivo,"rb");
@@ -46,7 +47,7 @@ void ArchivoProfesores::listarRegistros(){
 
     while(fread(&reg,_tamanioRegistro,1,pProfesor)==1){
         if(reg.getEstado()){
-            reg.Mostrar();
+            reg.mostrar();
         }
     }
 
@@ -54,7 +55,7 @@ void ArchivoProfesores::listarRegistros(){
 }
 
 void ArchivoProfesores::listarInactivos(){
-    Alumno reg;
+    Profesores reg;
     FILE *pProfesor;
 
     pProfesor = fopen(_nombreArchivo,"rb");
@@ -64,14 +65,14 @@ void ArchivoProfesores::listarInactivos(){
 
     while(fread(&reg,_tamanioRegistro,1,pProfesor)==1){
         if(reg.getEstado()==0){
-            reg.Mostrar();
+            reg.mostrar();
         }
     }
 
     fclose(pProfesor);
 }
 
-void ArchivoProfesores::listarProfesorEspecifico(profesores registro){
+void ArchivoProfesores::listarProfesorEspecifico(Profesores registro){
     FILE *pProfesor;
 
     pProfesor = fopen(_nombreArchivo,"rb");
@@ -81,14 +82,14 @@ void ArchivoProfesores::listarProfesorEspecifico(profesores registro){
 
     int leer= fread(&registro,_tamanioRegistro,1,pProfesor);
     if(leer==1){
-        registro.Mostrar();
+        registro.mostrar();
     }
 
     fclose(pProfesor);
 }
 
 int ArchivoProfesores::buscarProfesor(string dni){
-     profesores reg;
+     Profesores reg;
     int posicion=0;
 
     FILE *pProfesor;
@@ -109,17 +110,17 @@ int ArchivoProfesores::buscarProfesor(string dni){
 }
 
 int ArchivoProfesores::buscarProfesor(int legajo){
-     profesores reg;
+     Profesores reg;
     int posicion=0;
 
     FILE *pProfesor;
     pProfesor = fopen(_nombreArchivo,"rb");
-    if(pAlumno== nullptr){
+    if(pProfesor== nullptr){
        /// cout<<"ERROR DE ARCHIVO"<<endl;
        return -1;
     }
     while(fread(&reg,_tamanioRegistro,1,pProfesor)==1){
-        if(reg.getLegajoAlumno()== legajo){
+        if(reg.getLegajoProfesor()== legajo){
             fclose(pProfesor);
             return posicion;
         }
@@ -130,7 +131,7 @@ int ArchivoProfesores::buscarProfesor(int legajo){
 }
 
 int ArchivoProfesores::buscarProfesor(const char* apellido){
-     profesores reg;
+     Profesores reg;
     int posicion=0;
 
     FILE *pProfesor;
@@ -151,13 +152,13 @@ int ArchivoProfesores::buscarProfesor(const char* apellido){
 }
 
 
-profesores ArchivoProfesores::leerProfesor(int pos){
+Profesores ArchivoProfesores::leerProfesor(int pos){
     FILE *pArchivo;
     pArchivo = fopen(_nombreArchivo,"rb");
     if(pArchivo== nullptr){
-        return profesores();
+        return Profesores();
     }
-    profesores reg;
+    Profesores reg;
     fseek(pArchivo,_tamanioRegistro*pos,SEEK_END);
     fread(&reg,_tamanioRegistro,1,pArchivo);
 
@@ -165,7 +166,7 @@ profesores ArchivoProfesores::leerProfesor(int pos){
     return reg;
 }
 
-bool ArchivoProfesores::modificarProfesor(const profesores &reg, int pos){
+bool ArchivoProfesores::modificarProfesor(const Profesores &reg, int pos){
     FILE *pArchivo;
     pArchivo = fopen(_nombreArchivo,"rb+");
     if(pArchivo==nullptr){
@@ -179,7 +180,7 @@ bool ArchivoProfesores::modificarProfesor(const profesores &reg, int pos){
 }
 
 bool ArchivoProfesores::bajaLogica(string dni){
-    profesores reg;
+    Profesores reg;
     ArchivoProfesores archi;
     int pos=archi.buscarProfesor(dni);
     if(pos==-1) return false;
@@ -189,7 +190,7 @@ bool ArchivoProfesores::bajaLogica(string dni){
 }
 
 bool ArchivoProfesores::altaLogica(string dni){
-    profesores reg;
+    Profesores reg;
     ArchivoProfesores archi;
     int pos=archi.buscarProfesor(dni);
     if(pos==-1) return false;

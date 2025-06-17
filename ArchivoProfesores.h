@@ -4,25 +4,26 @@
 #include<string>
 
 
-class ArhivoProfesores{
+class ArchivoProfesores{
 
   public:
       ArchivoProfesores(const char *nombre= "Profesores.dat");
-      
+
     int CantidadRegistros();
-    bool agregarProfesor(profesores reg);
-     
+    bool agregarProfesor(Profesores reg);
+
     void  listarRegistros();
     void  listarInactivos();
-    void listarProfesorEspecifico(profesores registro); 
+    void listarProfesorEspecifico(Profesores registro);
     int buscarProfesor(const char *apellido);
     int buscarProfesor (std::string dni);
     int buscarProfesor(int legajo);
-    profesores leerProfesor(int pos);
-    bool modificarProfesor(const profesores &reg, int pos);
+    Profesores leerProfesor(int pos);
+    bool modificarProfesor(const Profesores &reg, int pos);
     bool bajaLogica(std::string dni);
     bool altaLogica(std:: string dni);
-        
+
  private:
    char _nombreArchivo[30];
    int _tamanioRegistro;
+};

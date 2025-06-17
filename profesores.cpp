@@ -1,4 +1,5 @@
 #include "Profesores.h"
+#include "Persona.h"
 #include <iostream>
 #include <cstring>
 
@@ -6,20 +7,19 @@
 using namespace std;
 
 
-  profesores::profesores(){
+  Profesores::Profesores(){
 
       _legajoProfesor=0;
       _idMateria=0;
-      _anioDeIngreso=0;
+      _anioIngreso=0;
       _cbu[0]= '\0';
       _sueldo=0.0;
 
   }
 
 
-    profesores::profesores(( int tipoDocumento,std::string numDocumento, std::string nombres,std::string apellidos,std::string numTelefono,std::string direccion
-               std::string mail, Fecha fechaNac,int legajoProfesor, int idMateria,int anioIngreso, std::string cbu,float sueldo)
-
+    Profesores::Profesores(int tipoDocumento,std::string numDocumento, std::string nombres,std::string apellidos,std::string numTelefono,std::string direccion,
+               std::string mail, Fecha fechaNac, int edad, bool estado, int legajoProfesor, int idMateria,int anioIngreso, std::string cbu,float sueldo)
       :Persona(tipoDocumento,numDocumento,nombres,apellidos, edad,
          numTelefono,direccion, mail, estado, fechaNac){
 
@@ -29,70 +29,70 @@ using namespace std;
     setCbu(cbu);
     setSueldo(sueldo);
 
+ }
 
 
-
- void profesores::setLegajoProfesor(int legajoProfesor){
+ void Profesores::setLegajoProfesor(int legajoProfesor){
 
        _legajoProfesor=legajoProfesor;
 
 }
 
- void profesores::setIdMateria(int idMateria){
+ void Profesores::setIdMateria(int idMateria){
 
      _idMateria=idMateria;
 
  }
 
 
-  void profesores::setAnioIngreso(int anioIngreso){
+  void Profesores::setAnioIngreso(int anioIngreso){
 
     _anioIngreso=anioIngreso;
 
   }
 
 
-  void profesores::setCbu(std::string cbu){
+  void Profesores::setCbu(std::string cbu){
 
-      _cbu=cbu;
+      _cbu= cbu;
 
   }
 
-  void profesores::setSueldo(float sueldo){
+  void Profesores::setSueldo(float sueldo){
 
     _sueldo=sueldo;
 
   }
 
 
-  int profesores::getLegajoProfesor(){
+  int Profesores::getLegajoProfesor(){
 
       return _legajoProfesor;
   }
 
-  int profesores::getIdMateria(){
+  int Profesores::getIdMateria(){
 
       return _idMateria;
   }
 
-  int profesores::getAnioIngreso(){
+  int Profesores::getAnioIngreso(){
 
    return _anioIngreso;
 
   }
 
-  std::string profesores::getCbu(){
+  std::string Profesores::getCbu(){
 
     return _cbu;
   }
 
-  float profesores::getSueldo(){
+  float Profesores::getSueldo(){
 
   return _sueldo;
   }
 
 
-  bool profesores::cargar(){
+  void Profesores::cargar(int legajoP){
 
    cout<< "=============DATOS PERSONALES ============"<< endl;
    cout<<endl;
@@ -104,10 +104,12 @@ using namespace std;
     setTipoDocumento(tipoDocumento);
     string nombres;
     cout<<"NOMBRES: ";
+    cin.ignore();
     getline(cin,nombres);
     setNombres(nombres);
     string apellidos;
     cout<<"APELLIDOS: ";
+    cin.ignore();
     getline(cin,apellidos);
     setApellidos(apellidos);
     int edad;
@@ -131,14 +133,17 @@ using namespace std;
     setFechaNac(Fecha(dia,mes,anio));
     string numTelefono;
     cout<<"NUMERO DE TELEFONO: " ;
+    cin.ignore();
     getline(cin,numTelefono);
     setNumTelefono(numTelefono);
     string direccion;
     cout<<"DIRECCION: ";
+    cin.ignore();
     getline(cin,direccion);
     setDireccion(direccion);
     string mail;
     cout<<"MAIL: ";
+    cin.ignore();
     getline(cin,mail);
     setMail(mail);
     cout<<endl;
@@ -147,9 +152,9 @@ using namespace std;
     cout<< "============DATOS INSTITUCIONALES ======="<<endl;
     cout<<endl;
     cout<<"MATERIA"<<endl;
-    cin>> _idMateria<<endl;
+    cin>>_idMateria;
     cout<<"AÑO DE INGRESO A LA INSITUCION"<<endl;
-    cin>>_anioIngreso<<endl;
+    cin>>_anioIngreso;
     cout<< "NUMERO DE CBU(11 digitos)"<< endl;
     cin>>_cbu;
     int contador=0;
@@ -161,21 +166,17 @@ using namespace std;
 
     cout<< "CBU incorrecto, vuelva a escribirlo"<<endl;
     }
-
-
-}
-    cout<<"MONTO DE SUELDO"<<endl;
+    cout<< "MONTO DE SUELDO" <<endl;
     cin>>_sueldo;
 
+}
 
 
-  }
 
-
-  void profesores::mostrar(){
+  void Profesores::mostrar(){
 
     cout<<"-----DATOS PERSONALES-----"<<endl;
-    cout<<"LEGAJO: "<<getLegajoProfedor()<<endl;
+    cout<<"LEGAJO: "<<getLegajoProfesor()<<endl;
     cout<<"TIPO DE DOCUMENTO: ";
     MostrarTipoDocumento(getTipoDocumento());
     cout<<endl;
@@ -193,41 +194,6 @@ using namespace std;
     cout<<"AÑO DE INGRESO A LA INSITUCION: "<<getAnioIngreso()<<endl;
     cout<< "NUMERO DE CBU: "<<getCbu()<<endl;
     cout<<"MONTO DE SUELDO: "<<getSueldo()<<endl;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   }
 
