@@ -8,6 +8,7 @@ public:
     int IncrementarLegajo();
     int CargarProfesor();
     void ListarProfesoresActivos();
+    void menuProfesores();
     void buscarProfesorPorLegajo(int legajo);
     void buscarProfesorPorDNI(std::string dni);
     void buscarProfesorPorApellido(const char *apellido);

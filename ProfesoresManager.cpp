@@ -71,7 +71,37 @@ void ProfesoresManager::buscarProfesorPorApellido(const char *apellido){
 void ProfesoresManager::ListarProfesoresActivos(){
     Profesores reg;
 
-    cout<<"------ALUMNOS ACTIVOS-------"<<endl;
+    cout<<"------PROFESORES ACTIVOS-------"<<endl;
     _archiProf.listarRegistros();
     cout<<endl;
+}
+
+void ProfesoresManager::menuProfesores() {
+    int opcion;
+    do {
+        cout << "==== MENU PROFESORES ====" << endl;
+        cout << "1. Cargar profesor" << endl;
+        cout << "2. Listar todos" << endl;
+        cout << "3. Buscar por DNI" << endl;
+        cout << "0. Volver" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch(opcion) {
+            case 1:
+                CargarProfesor();
+                break;
+            case 2:
+                ListarProfesoresActivos();
+                break;
+            case 3:
+                {
+                    string dni;
+                    cout << "Ingrese DNI a buscar: ";
+                    cin >> dni;
+                    buscarProfesorPorDNI(dni);
+                }
+                break;
+        }
+    } while(opcion != 0);
 }
