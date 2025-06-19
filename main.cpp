@@ -1,7 +1,7 @@
 #include "MenuBusquedas.h"
 #include "MenuInscripciones.h"
 #include "ProfesoresManager.h"
-//#include "MenuReportes.h"
+#include "MenuReportes.h"
 //#include "MenuGestionesAcademicas.h"
 #include <iostream>
 #include <cstring>
@@ -55,8 +55,7 @@ int main() {
             break;
         }
         case 5:{
-            cout << "Menu de Reportes (en desarrollo)" << endl;
-            system("pause");
+            menuReportes();
             break;
         }
         case 6:{
