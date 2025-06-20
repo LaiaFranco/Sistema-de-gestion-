@@ -1,34 +1,39 @@
 #pragma once
 #include<iostream>
 #include <cstring>
-#include <string>
+
 
 using namespace std;
-
-class Materia {
+class Materia{
 public:
     Materia ();
+    Materia(int id, bool nivel, int anio, const char *nombre, int horas, bool estado);
 
     //setters
     void setCodigo (int cod);
+    void setNivelEducativoMateria(bool nivel);
+    void setAnioMateria(int anio);
     void setNombre (const char* nombre);
     void setCargaHoraria (int horas);
-    void setActivo(bool activo);
+    void setEstado(bool estado);
 
     // getters
     int getCodigo();
+    bool getNivelEducativoMateria();
+    int  getAnioMateria();
     const char* getNombre();
     int getCargaHoraria();
-    bool getActivo();
+    bool getEstado();
 
     // metodos
-    void Cargar();
     void Mostrar();
 
 private:
     int _codigo;
+    bool _nivelEdMataria;
+    int _anioMateria;
     char _nombre[30];
     int _cargaHoraria;
-    bool _activo;
+    bool _estado;
 };
 

@@ -8,10 +8,10 @@ class Persona{
 
 public:
     Persona();
-    Persona(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad, string numTelefono, string direccion,string mail,bool estado, const Fecha& fechaNac);
+    Persona(int tipoDocumento, int numDocumento,string nombres, string apellidos,int edad, string numTelefono, string direccion,string mail,bool estado, const Fecha& fechaNac);
 
     void setTipoDocumento(int  tipoDocumento);
-    void setNumDocumento(string numDocumento);
+    void setNumDocumento(int numDocumento);
     void setNombres(string nombres);
     void setApellidos (string apellidos);
     void setEdad(int edad);
@@ -22,7 +22,7 @@ public:
     void setFechaNac(const Fecha &fechaNac);
 
     int  getTipoDocumento();
-    string getNumeroDocumento();
+    int  getNumeroDocumento();
     string getNombres();
     string getApellidos();
     int getEdad();
@@ -37,7 +37,7 @@ public:
 
 private:
     int  _tipoDocumento;
-    char _numDocumento [8];
+    int  _numDocumento;
     char _nombres [50];
     char _apellidos[50];
     int _edad;
@@ -48,7 +48,6 @@ private:
 
 protected:
     Fecha _fechaNac;
-
 
 };
 

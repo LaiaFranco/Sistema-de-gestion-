@@ -7,7 +7,7 @@ class Alumno: public Persona{
 
 public:
     Alumno();
-    Alumno(int tipoDocumento, string numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado,const Fecha& fechaNac,int legajoAlumno, bool nivelAcademico, int anioAcademico, string tutor, string nombreTutor, string apellidoTutor, bool tieneHermanos);
+    Alumno(int tipoDocumento, int numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado,const Fecha& fechaNac,int legajoAlumno, bool nivelAcademico, int anioAcademico, string tutor, string nombreTutor, string apellidoTutor, bool tieneHermanos);
 
     void setLegajoAlumno(int legajoAlumno);
     void setNivelAcademico(bool nivelAcademico);

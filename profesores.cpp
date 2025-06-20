@@ -5,26 +5,24 @@
 
 
 using namespace std;
-
-
-  Profesores::Profesores(){
-
+Profesores::Profesores(){
       _legajoProfesor=0;
-      _idMateria=0;
+      cantidad = 0;
+      capacidad = 1;
+      _idMateria = new int [capacidad];
       _anioIngreso=0;
       _cbu[0]= '\0';
       _sueldo=0.0;
+}
 
-  }
 
-
-    Profesores::Profesores(int tipoDocumento,std::string numDocumento, std::string nombres,std::string apellidos,std::string numTelefono,std::string direccion,
-               std::string mail, Fecha fechaNac, int edad, bool estado, int legajoProfesor, int idMateria,int anioIngreso, std::string cbu,float sueldo)
+Profesores::Profesores(int tipoDocumento , int numDocumento, std::string nombres,std::string apellidos,std::string numTelefono,std::string direccion,
+               std::string mail, Fecha fechaNac, int edad, bool estado, int legajoProfesor, int idMateria,int indice,int anioIngreso, const char *cbu,float sueldo)
       :Persona(tipoDocumento,numDocumento,nombres,apellidos, edad,
          numTelefono,direccion, mail, estado, fechaNac){
 
     setLegajoProfesor( legajoProfesor);
-    setIdMateria(idMateria);
+    setIdMateria(idMateria,indice);
     setAnioIngreso( anioIngreso);
     setCbu(cbu);
     setSueldo(sueldo);
@@ -38,12 +36,25 @@ using namespace std;
 
 }
 
- void Profesores::setIdMateria(int idMateria){
+ void Profesores::setIdMateria(int idMateria, int i){
+    i = i-1;
+    if(i < 0){
+        cout << "Índice inválido (menor que 1)" << endl;
+        return;
+    }
 
-     _idMateria=idMateria;
+    // Si el índice es mayor o igual a capacidad, agrandamos
+    if(i >= capacidad){
+        AgrandarVector();
+    }
 
- }
+    // Si el índice es mayor o igual a cantidad, ajustamos cantidad también
+    if(i >= cantidad){
+        cantidad = i + 1;
+    }
 
+    _idMateria[i] = idMateria;
+}
 
   void Profesores::setAnioIngreso(int anioIngreso){
 
@@ -51,11 +62,15 @@ using namespace std;
 
   }
 
+  void Profesores::setCbu(const char *cbu){
+      if(strlen(cbu)==22){
+        strcpy(_cbu,cbu);
+        _cbu[23] = '\0';
+      }
 
-  void Profesores::setCbu(std::string cbu){
-
-      _cbu= cbu;
-
+  }
+  void Profesores:: setCantidad(int cant){
+      cantidad = cant;
   }
 
   void Profesores::setSueldo(float sueldo){
@@ -70,10 +85,24 @@ using namespace std;
       return _legajoProfesor;
   }
 
-  int Profesores::getIdMateria(){
-
-      return _idMateria;
+  int Profesores::getCantidad(){
+      return cantidad;
   }
+
+  int Profesores::getIdMateria(int i) {
+    if (i >= 0 && i < cantidad) {
+        return _idMateria[i];
+    } else {
+        return -1; // índice inválido
+    }
+}
+  int Profesores::mostrarIdMaterias(){
+        cout<<"---- MATERIAS DEL PROFESOR ----"<<endl;
+        for(int i=0;i<cantidad;i++){
+                cout<<"Materia N: "<<i+1<<_idMateria[i]<<endl;
+        }
+        cout<<endl;
+    }
 
   int Profesores::getAnioIngreso(){
 
@@ -81,7 +110,7 @@ using namespace std;
 
   }
 
-  std::string Profesores::getCbu(){
+  const char *Profesores::getCbu(){
 
     return _cbu;
   }
@@ -91,90 +120,29 @@ using namespace std;
   return _sueldo;
   }
 
+void Profesores::AgrandarVector(){
+    int NuevaCapacidad = capacidad +1;
+    int *Vec = new int[NuevaCapacidad];
+    if(Vec==nullptr){cout<<"vector con basura"<<endl;}
 
-  void Profesores::cargar(int legajoP){
-
-   cout<< "=============DATOS PERSONALES ============"<< endl;
-   cout<<endl;
-      _legajoProfesor=legajoP;
-   cout<< "Su Legajo es: "<< _legajoProfesor<< endl;
-   int  tipoDocumento;
-    cout<<"TIPO DE DOCUMENTO(1-DNI, 2-PASAPORTE, 3-LIBRETA CIVICA): ";
-    cin>>tipoDocumento;
-    setTipoDocumento(tipoDocumento);
-    string nombres;
-    cout<<"NOMBRES: ";
-    cin.ignore();
-    getline(cin,nombres);
-    setNombres(nombres);
-    string apellidos;
-    cout<<"APELLIDOS: ";
-    cin.ignore();
-    getline(cin,apellidos);
-    setApellidos(apellidos);
-    int edad;
-    cout<<"EDAD: ";
-    cin>>edad;
-    setEdad(edad);
-    int dia;
-    int mes;
-    int anio;
-    cout<<"===FECHA NACIMIENTO=== "<<endl;
-    cout<<endl;
-    cout<<"DIA: ";
-    cin>>dia;
-    cout<<endl;
-    cout<<"MES: ";
-    cin>>mes;
-    cout<<endl;
-    cout<<"ANIO: ";
-    cin>>anio;
-    cout<<endl;
-    setFechaNac(Fecha(dia,mes,anio));
-    string numTelefono;
-    cout<<"NUMERO DE TELEFONO: " ;
-    cin.ignore();
-    getline(cin,numTelefono);
-    setNumTelefono(numTelefono);
-    string direccion;
-    cout<<"DIRECCION: ";
-    cin.ignore();
-    getline(cin,direccion);
-    setDireccion(direccion);
-    string mail;
-    cout<<"MAIL: ";
-    cin.ignore();
-    getline(cin,mail);
-    setMail(mail);
-    cout<<endl;
-    bool estado=true ;
-    setEstado(estado);
-    cout<< "============DATOS INSTITUCIONALES ======="<<endl;
-    cout<<endl;
-    cout<<"MATERIA"<<endl;
-    cin>>_idMateria;
-    cout<<"AÑO DE INGRESO A LA INSITUCION"<<endl;
-    cin>>_anioIngreso;
-    cout<< "NUMERO DE CBU(11 digitos)"<< endl;
-    cin>>_cbu;
-    int contador=0;
-    for(int x=0; _cbu[x]; x++){
-
-        contador++;
+    for(int i=0; i<cantidad;i++){
+        Vec[i] = _idMateria[i];
     }
-    if (contador!=11){
 
-    cout<< "CBU incorrecto, vuelva a escribirlo"<<endl;
+    delete[] _idMateria;
+    _idMateria = Vec;
+    capacidad = NuevaCapacidad;
+}
+
+void Profesores::agregarIdMateria(int id){
+    if(cantidad >= capacidad){
+        AgrandarVector();
     }
-    cout<< "MONTO DE SUELDO" <<endl;
-    cin>>_sueldo;
-
+    _idMateria[cantidad++] = id;
 }
 
 
-
   void Profesores::mostrar(){
-
     cout<<"-----DATOS PERSONALES-----"<<endl;
     cout<<"LEGAJO: "<<getLegajoProfesor()<<endl;
     cout<<"TIPO DE DOCUMENTO: ";
@@ -190,7 +158,7 @@ using namespace std;
     cout<<"MAIL: "<<getMail()<<endl;
 
     cout<< "============DATOS INSTITUCIONALES ======="<<endl;
-    cout<<"MATERIA: "<<getIdMateria()<<endl;
+    cout<<"MATERIA: "<<mostrarIdMaterias()<<endl;
     cout<<"AÑO DE INGRESO A LA INSITUCION: "<<getAnioIngreso()<<endl;
     cout<< "NUMERO DE CBU: "<<getCbu()<<endl;
     cout<<"MONTO DE SUELDO: "<<getSueldo()<<endl;

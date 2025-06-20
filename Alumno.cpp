@@ -13,7 +13,7 @@ Alumno::Alumno(){
     _tieneHermanos= false;
 }
 
-Alumno::Alumno(int tipoDocumento, string numDocumento,string nombres, string apellidos,
+Alumno::Alumno(int tipoDocumento, int numDocumento,string nombres, string apellidos,
                int edad,string numTelefono, string direccion,string mail,bool estado,
                const Fecha& fechaNac,int legajoAlumno, bool nivelAcademico,int anioAcademico,
                string tutor, string nombreTutor, string apellidoTutor,bool tieneHermanos)
@@ -87,6 +87,7 @@ void Alumno::Mostrar(){
     cout<<"TIPO DE DOCUMENTO: ";
     MostrarTipoDocumento(getTipoDocumento());
     cout<<endl;
+    cout<<"NUMERO DE DOCUMENTO: "<< getNumeroDocumento()<<endl;
     cout<<"NOMBRES: "<<getNombres()<<endl;
     cout<<"APELLIDOS: "<<getApellidos()<<endl;
     cout<<"EDAD: "<<getEdad()<<endl;

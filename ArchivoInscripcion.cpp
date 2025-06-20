@@ -89,7 +89,7 @@ void ArchivoInscripcion::listarInscripcionPorAnio(int anio){
     fclose(p);
 }
 
-int ArchivoInscripcion::buscarInscripcion(int idCurso){
+int ArchivoInscripcion::buscarInscripcion(int id){
     inscripcion reg;
     int posicion=0;
 
@@ -100,7 +100,7 @@ int ArchivoInscripcion::buscarInscripcion(int idCurso){
         return -2;
     }
     while(fread(&reg,_tamanioRegistro,1,p)==1){
-        if(reg.getIdCurso() == idCurso){
+        if(reg.getIdInscripcion() == id && reg.getEstado()){
             fclose(p);
             return posicion;
         }
@@ -139,7 +139,7 @@ inscripcion ArchivoInscripcion::leerInscripcion(int pos){
     }
 
     inscripcion reg;
-    fseek(p,_tamanioRegistro*pos,SEEK_END);
+    fseek(p,_tamanioRegistro*pos,SEEK_SET);
     fread(&reg,_tamanioRegistro,1,p);
 
     fclose(p);
@@ -150,13 +150,13 @@ bool ArchivoInscripcion:: modificarInscripcion(const inscripcion &reg, int pos){
     FILE *p;
     p = fopen(_nombreArchivo,"rb+");
     if(p==nullptr){
-        return -1;
+        return 0;
     }
-    fseek(p,pos*_tamanioRegistro,0);
+    fseek(p,pos*_tamanioRegistro,SEEK_SET);
     bool escribio = fwrite(&reg,_tamanioRegistro,1,p);
 
     fclose(p);
-    return escribio;
+    return escribio==1;
 }
 
 bool ArchivoInscripcion::bajaLogica(int idInscripcion){
@@ -179,5 +179,4 @@ bool ArchivoInscripcion::altaLogica(int idInscripcion){
     reg = leerInscripcion(pos);///en reg tengo el registro a borrar
     reg.setEstado(true);
     return modificarInscripcion(reg,pos);
-
 }

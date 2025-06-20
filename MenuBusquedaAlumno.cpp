@@ -23,7 +23,6 @@ void MenuBusquedaAlumno::menuBusquedaAlumno(){
         switch(opcion) {
         case 1: {
              system("cls");
-             system("pause");
             int legajo;
             cout << "INGRESE LEGAJO DEL ALUMNO: ";
             cin >> legajo;
@@ -31,13 +30,15 @@ void MenuBusquedaAlumno::menuBusquedaAlumno(){
             break;
         }
         case 2: {
-            string dni;
+              system("cls");
+            int dni;
             cout << "INGRESE DNI DEL ALUMNO(SIN PUNTOS): ";
             cin >> dni;
             aluManager.buscarAlumnoPorDNI(dni);
             break;
         }
         case 3: {
+              system("cls");
             char apellido[30];
             cout << "INGRESE APELLIDO DEL ALUMNO: ";
             cin.ignore();

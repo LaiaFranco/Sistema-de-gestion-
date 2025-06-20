@@ -1,4 +1,4 @@
-#include"ProfesoresPorCurso.h"
+#include"ProfesoresXCurso.h"
 #include"ArchivoProfesoresxCurso.h"
 #include <cstring>
 #include<iostream>
@@ -51,7 +51,7 @@ return escribio;
 
 void ArchivoProfesoresxCurso::listarRegistroTotal(){
 
- ProfesoresXCurso reg;
+ ProfesoresxCurso reg;
  FILE *pProfesoresxCurso;
  pProfesoresxCurso=fopen (_nombreArchivo,"rb");
  if(pProfesoresxCurso==nullptr){
@@ -73,12 +73,12 @@ void ArchivoProfesoresxCurso::listarPorProfesor(int legajoProfesor){
 
    FILE *pProfesoresxCurso;
 
-   pProfesoresxCurso=fopen(_nombreArchivo,"rb")
+   pProfesoresxCurso = fopen(_nombreArchivo,"rb");
     if(pProfesoresxCurso==nullptr){
 
     cout<<"ERROR! NO SE PUDO ABRIR EL ARCHIVO"<<endl;
 
-    
+
 
  }
  ProfesoresxCurso reg;
@@ -97,56 +97,57 @@ void ArchivoProfesoresxCurso::listarPorCurso(int  idCurso){
 
  FILE *pProfesoresxCurso;
 
-   pProfesoresxCurso=fopen(_nombreArchivo,"rb")
+   pProfesoresxCurso=fopen(_nombreArchivo,"rb");
     if(pProfesoresxCurso==nullptr){
 
     cout<<"ERROR! NO SE PUDO ABRIR EL ARCHIVO"<<endl;
 
-    
+
 
 }
 ProfesoresxCurso reg;
 while(fread(&reg,_tamanioRegistro,1,pProfesoresxCurso)==1){
 
- if (reg.getidCurso() == idCurso )) {
+ if (reg.getIdCurso() == idCurso ) {
             reg.mostrar();
         }
     }
 
     fclose(pProfesoresxCurso);
 }
+
 int ArchivoProfesoresxCurso::buscarRelacion(ProfesoresxCurso buscReg){
   int posicion=0;
  FILE *pProfesoresxCurso;
  pProfesoresxCurso=fopen(_nombreArchivo,"rb");
  if(pProfesoresxCurso==nullptr){
-    
+
     cout<<"ERROR! NO SE PUDO ABRIR EL ARCHIVO"<<endl;
-    
+
     return -2;
  }
  ProfesoresxCurso reg;
  while(fread(&reg,_tamanioRegistro,1,pProfesoresxCurso)==1){
-    
+
     if(reg.getLegajoProfesor()== buscReg.getLegajoProfesor()&& reg.getIdCurso()==buscReg.getIdCurso()&& reg.getEstado()) {
-       
+
        fclose(pProfesoresxCurso);
         return posicion;
      }
-     
+
      posicion++;
  }
- 
+
  fclose(pProfesoresxCurso);
  return-1;
- 
+
 }
 bool ArchivoProfesoresxCurso:: modificarRegistro(ProfesoresxCurso &reg, int pos){
 
   FILE *pProfesoresxCurso;
   pProfesoresxCurso=fopen(_nombreArchivo,"rb+");
   if(pProfesoresxCurso==nullptr){
-    
+
     cout<<"ERROR! NO SE PUDO ABRIR EL ARCHIVO"<<endl;
       return-1;
 }
@@ -160,36 +161,36 @@ bool ArchivoProfesoresxCurso:: modificarRegistro(ProfesoresxCurso &reg, int pos)
 }
 bool ArchivoProfesoresxCurso::bajaLogica(int legajoProfesor, int idCurso) {
     ProfesoresxCurso reg;
-    int pos = buscarRelacion(ProfesoresxCurso(legajoProfesor, idCurso)); 
-    
+    int pos = buscarRelacion(ProfesoresxCurso(legajoProfesor, idCurso));
+
     if (pos == -1){
-        
-        return false; 
+
+        return false;
     }
-    
-    
-    reg = leerProfesoresxCurso(pos);  
-    
-    reg.setEstado(false);  
-    
-    return modificarRegistro(reg, pos);  
+
+
+    reg = leerProfesoresxCurso(pos);
+
+    reg.setEstado(false);
+
+    return modificarRegistro(reg, pos);
 }
 
 bool ArchivoProfesoresxCurso::altaLogica(int legajoProfesor, int idCurso) {
     ProfesoresxCurso reg;
-    int pos = buscarRelacion(ProfesoresxCurso(legajoProfesor, idCurso)); 
-    
+    int pos = buscarRelacion(ProfesoresxCurso(legajoProfesor, idCurso));
+
     if (pos == -1) {
-        
-     return false;  
+
+     return false;
     }
-    reg = leerProfesoresxCurso(pos);  
-    
-    reg.setEstado(true);  
-    
-    return modificarRegistro(reg, pos);  
+    reg = leerProfesoresxCurso(pos);
+
+    reg.setEstado(true);
+
+    return modificarRegistro(reg, pos);
 }
-ProfesoresxCurso ArchivoProfesoresxCurso::leerProfesor(int pos){
+ProfesoresxCurso ArchivoProfesoresxCurso::leerProfesoresxCurso(int pos){
     FILE *pArchivo;
     pArchivo = fopen(_nombreArchivo,"rb");
     if(pArchivo== nullptr){

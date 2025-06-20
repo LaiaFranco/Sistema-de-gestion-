@@ -22,16 +22,23 @@ void MenuInscripciones::menuInscripciones(){
 
         switch (opcion) {
             case 1:{
+                system("cls");
                 InscripcionesManager insMan;
                 insMan.CargarInscripcion();
                 break;
             }
-            case 2:
-               // reinscribirAlumnoAntiguo();
+            case 2:{
+                system("cls");
+                InscripcionesManager insMan;
+                insMan.ReinscribirAlumno();
                 break;
-            case 3:
-               // consultarEstadoInscripcion();
+            }
+            case 3:{
+                system("cls");
+               InscripcionesManager insMan;
+               insMan.EstadoInscipcion();
                 break;
+            }
             case 4:
                 //listarInscriptosPorCurso();
                 break;

@@ -1,8 +1,6 @@
 #include "MenuBusquedas.h"
 #include "MenuInscripciones.h"
-#include "ProfesoresManager.h"
-#include "MenuReportes.h"
-//#include "MenuGestionesAcademicas.h"
+#include "Menus.h"
 #include <iostream>
 #include <cstring>
 
@@ -38,43 +36,36 @@ int main() {
             break;
         }
         case 2:{
-            // Menú Gestiones Académicas (materias/cursos)
-            cout << "Menu de Gestiones Academicas (en desarrollo)" << endl;
-            system("pause");
+            system("cls");
+            Menus menuGestion;
+            menuGestion.MenuGestionesAcademicas();
             break;
         }
         case 3:{
-            // Personal Académico (cargar profesores)
-            ProfesoresManager pm;
-            pm.menuProfesores();  // si lo implementaste así
+
+            Menus menu;
+            menu.MenuPersonalAcademico();
             break;
         }
-        case 4: {
-            MenuBusqueda menBusq;
-            menBusq.MenuBusquedas();
+        case 4:{
+           MenuBusqueda menBusq;
+           menBusq.MenuBusquedas();
             break;
         }
-        case 5:{
-            menuReportes();
+        case 5:
             break;
-        }
-        case 6:{
-            cout << "Configuracion del sistema (en desarrollo)" << endl;
-            system("pause");
+        case 6:
             break;
-        }
-        case 0:{
+        case 0:
             cout << "Gracias por usar el sistema<3." << endl;
             break;
-        }
-        default:{
+        default:
             cout << "Opción inválida." << endl;
         }
 
-
         system("pause");
         system("cls");
-        }
+
     } while (opcion != 0);
 
     return 0;

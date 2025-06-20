@@ -13,7 +13,7 @@ public:
     void  listarIncripciones();
     void  listarInactivos();
     void listarInscripcionPorAnio(int anio);
-    int buscarInscripcion(int idCurso);
+    int buscarInscripcion(int id);
     int buscarInscripcionPorLegajo(int legajo);
     inscripcion leerInscripcion(int pos);
     bool modificarInscripcion(const inscripcion &reg, int pos);

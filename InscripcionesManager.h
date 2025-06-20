@@ -12,8 +12,12 @@ class InscripcionesManager{
 public:
     int IncrementarInscripcion();
     void CargarInscripcion();
-    void buscarCursoDisponible(int anio,bool nivelEducativo);
+    void buscarCursoDisponible(bool nivelEducativo,int anio);
     void guardarRegistro(int idCurso, int legajo);
+    void ReinscribirAlumno();
+    void EstadoInscipcion();
+    void emisionCertificadoParcial(Alumno &reg);
+    void emisionCertificadoFinal(Alumno &reg);
 
 private:
     ArchivoInscripcion  archivoIns;

@@ -5,5 +5,4 @@ class MenuInscripciones{
 
 public:
     void menuInscripciones();
-
 };

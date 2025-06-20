@@ -1,11 +1,12 @@
 #include "Persona.h"
 #include "iostream"
 #include "cstring"
+#include "string"
 
 using namespace std;
 Persona::Persona():_fechaNac(1,1,2023){
         _tipoDocumento = 0;
-        _numDocumento[0] = '\0';
+        _numDocumento = 0;
         _nombres[0]= '\0';
         _apellidos[0]= '\0';
         _numTelefono[0]= '\0';
@@ -14,7 +15,7 @@ Persona::Persona():_fechaNac(1,1,2023){
         _estado = false;
 }
 
-Persona::Persona(int  tipoDocumento, string numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado, const Fecha& fechaNac){
+Persona::Persona(int  tipoDocumento, int numDocumento,string nombres, string apellidos,int edad,string numTelefono, string direccion,string mail,bool estado, const Fecha& fechaNac){
     setTipoDocumento(tipoDocumento);
     setNumDocumento(numDocumento);
     setNombres(nombres);
@@ -31,8 +32,8 @@ void Persona::setTipoDocumento(int tipoDocumento){
     _tipoDocumento = tipoDocumento;
 }
 
-void Persona::setNumDocumento(string numDocumento){
-   strcpy(_numDocumento,numDocumento.c_str());
+void Persona::setNumDocumento(int numDocumento){
+   _numDocumento = numDocumento;
 }
 
 void Persona::setNombres(string nombres){
@@ -72,9 +73,10 @@ int Persona::getTipoDocumento(){
     return _tipoDocumento;
 }
 
-string Persona::getNumeroDocumento(){
+int Persona::getNumeroDocumento(){
     return _numDocumento;
 }
+
 string Persona::getNombres(){
     return _nombres;
 }

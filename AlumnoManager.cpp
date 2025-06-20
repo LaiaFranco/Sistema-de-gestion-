@@ -16,14 +16,12 @@ int AlumnoManager::IncrementarLegajo(){
 Alumno AlumnoManager::CargarAlumno(){
     Alumno reg;
     int tipoDni;
-    string numeroDni;
-    cout<<"INGRESAR TIPO DE DNI(1-DNI): ";
+    int  numeroDni;
+    cout<<"INGRESAR TIPO DE DNI(1-DNI, 2-OTRO): ";
     cin>>tipoDni;
-    cin.clear();
-    fflush(stdin);
     reg.setTipoDocumento(tipoDni);
     numeroDni = _archiALu.ValidarDni();
-    if(numeroDni!= "YA EXISTE ESE DNI"){
+    if(numeroDni!= 0){
         string nombres,apellidos,numTelefono,direccion,mail;
         string tutor, nombreTutor,apellidoTutor;
         int edad,legajo,nivelAcademico,anioAcademico;
@@ -93,6 +91,7 @@ Alumno AlumnoManager::CargarAlumno(){
         reg.setApellidoTutor(apellidoTutor);
         cout<<"TIENE HERMANOS(1-SI,0-NO): ";
         cin>>tieneHermanos;
+        reg.setTieneHermanos(tieneHermanos);
         _archiALu.agregarAlumno(reg);
         return reg;
     }else{
@@ -106,26 +105,31 @@ Alumno AlumnoManager::CargarAlumno(){
 
 void AlumnoManager::buscarAlumnoPorLegajo(int legajo){
     Alumno reg;
-    int posicion;
-    posicion = _archiALu.buscarAlumno(legajo);
-    reg = _archiALu.leerAlumno(posicion);
+
+    for(int i=0; i<_archiALu.CantidadRegistros();i++){
+    reg = _archiALu.leerAlumno(i);
+    if(reg.getLegajoAlumno()==legajo){
     reg.Mostrar();
+    }
+    }
 }
 
-void AlumnoManager::buscarAlumnoPorDNI(string dni){
+void AlumnoManager::buscarAlumnoPorDNI(int dni){
     Alumno reg;
-    int posicion;
-    posicion = _archiALu.buscarAlumno(dni);
-    reg = _archiALu.leerAlumno(posicion);
+
+    for(int i=0; i<_archiALu.CantidadRegistros();i++){
+    reg = _archiALu.leerAlumno(i);
+    if(reg.getNumeroDocumento()==dni){
     reg.Mostrar();
+    }
+    }
 }
 void AlumnoManager::buscarAlumnoPorApellido(const char *apellido){
     Alumno reg;
-    int posicion;
+
     for(int i = 0;i < _archiALu.CantidadRegistros();i++){
-        posicion = _archiALu.buscarAlumno(apellido);
-        reg = _archiALu.leerAlumno(posicion);
-        if(reg.getEstado()== true){
+        reg = _archiALu.leerAlumno(i);
+        if(reg.getApellidos()== apellido){
                 reg.Mostrar();
         }
     }
@@ -137,5 +141,33 @@ void AlumnoManager::ListarAlumnosActivos(){
     cout<<"------ALUMNOS ACTIVOS-------"<<endl;
     _archiALu.listarRegistros();
     cout<<endl;
+}
+
+void AlumnoManager::emisionCertificadoRegular( Alumno &reg){
+    int dia,mes,anio;
+    string VMes[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre","Diciembre"};
+    cout<<"|| FECHA DE HOY ||"<<endl;
+    cout<<"DIA: ";
+    cin>>dia;
+    cout<<"MES (1-enero,2-febrero,etc): ";
+    cin>>mes;
+    cout<<"ANIO: ";
+    cin>>anio;
+    cout<<endl;
+    system("cls");
+    cout<<"CERTIFICADO DE ALUMNO REGULAR"<<endl<<endl;
+    cout<<"La Dirección del IGB, Istituto General Belgrano, certifica que: "<<endl;
+    cout<<"El/la alumno/a "<<reg.getNombres()<<" "<<reg.getApellidos()<<", "<<"DNI " <<reg.getNumeroDocumento()<<" cursa regularmente el " << reg.getAnioAcademico()<<" º "<< "anio del nivel ";
+    if( reg.getNivelAcademico()){
+        cout<<"secudario ";
+    }else {
+        cout<<"primario ";
+    }
+    cout<<"en este establecimiento, durante el ciclo lectivo "<<anio<<endl;
+    cout<<"Se extiende el presente certificado a pedido del interesado, a los "<<dia<< " dias del mes de "<<VMes[mes-1]<< " de "<< anio;
+    cout<<" para ser presentado ante quien corresponda."<<endl;
+
+    cout<<endl<<endl<<endl;
+    cout<<"Firma y sello"<<endl;
 }
 

@@ -4,7 +4,8 @@
 
 using namespace std;
 
-ArchivoAlumno::ArchivoAlumno(const char *nombre){
+ArchivoAlumno::ArchivoAlumno(){
+    const char *nombre = "Alumno.dat";
     strcpy(_nombreArchivo,nombre);
     _nombreArchivo[29] = '\0';
     _tamanioRegistro = sizeof(Alumno);
@@ -87,7 +88,7 @@ void ArchivoAlumno::listarAlumnoEspecifico(Alumno registro){
     fclose(pAlumno);
 }
 
-int ArchivoAlumno::buscarAlumno(string dni){
+int ArchivoAlumno::buscarAlumnoPorDni(int dni){
      Alumno reg;
     int posicion=0;
 
@@ -150,17 +151,16 @@ int ArchivoAlumno::buscarAlumno(const char* apellido){
     return -1;
 }
 
-string  ArchivoAlumno::ValidarDni(){
+int  ArchivoAlumno::ValidarDni(){
     Alumno alu;
-    string dni;
-    string mensaje = "YA EXISTE ESE DNI";
+    int dni;
+
     cout<<"INGRESAR DNI: ";
-    cin.ignore();
-    getline(cin,dni,'\n');
+    cin>>dni;
             for(int i=0; i< CantidadRegistros();i++){
                     alu = leerAlumno(i) ;
             if(alu.getNumeroDocumento()== dni){
-                return mensaje;
+                return 0;
                 break;
             }
             }
@@ -195,7 +195,7 @@ bool ArchivoAlumno::modificarAlumno(const Alumno &reg, int pos){
     return escribio;
 }
 
-bool ArchivoAlumno::bajaLogica(string dni){
+bool ArchivoAlumno::bajaLogica(int dni){
     Alumno reg;
     ArchivoAlumno archi;
     int pos=archi.buscarAlumno(dni);
@@ -206,7 +206,7 @@ bool ArchivoAlumno::bajaLogica(string dni){
     return archi.modificarAlumno(reg,pos);
 }
 
-bool ArchivoAlumno::altaLogica(string dni){
+bool ArchivoAlumno::altaLogica(int dni){
     Alumno reg;
     ArchivoAlumno archi;
     int pos=archi.buscarAlumno(dni);
@@ -215,4 +215,25 @@ bool ArchivoAlumno::altaLogica(string dni){
     reg = archi.leerAlumno(pos);///en reg tengo el registro a borrar
     reg.setEstado(true);
     return archi.modificarAlumno(reg,pos);
+}
+
+Alumno ArchivoAlumno::buscarAlumnoXDni(int dni){
+    Alumno reg;
+    int posicion=0;
+
+    FILE *pAlumno;
+    pAlumno = fopen(_nombreArchivo,"rb");
+    if(pAlumno== nullptr){
+        ///cout<<"ERROR DE ARCHIVO"<<endl;
+        return Alumno();
+    }
+    while(fread(&reg,_tamanioRegistro,1,pAlumno)==1){
+        if(reg.getNumeroDocumento()== dni){
+            fclose(pAlumno);
+            return reg;
+        }
+        posicion++;
+    }
+    fclose(pAlumno);
+    return Alumno();
 }

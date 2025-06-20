@@ -1,4 +1,5 @@
 #pragma once
+#include "Persona.h"
 #include "Alumno.h"
 #include "ArchivoAlumno.h"
 #include "string"
@@ -9,8 +10,9 @@ public:
     Alumno CargarAlumno();
     void ListarAlumnosActivos();
     void buscarAlumnoPorLegajo(int legajo);
-    void buscarAlumnoPorDNI(string dni);
+    void buscarAlumnoPorDNI(int dni);
     void buscarAlumnoPorApellido(const char *apellido);
+    void emisionCertificadoRegular( Alumno &reg);
 
 private:
     ArchivoAlumno _archiALu;

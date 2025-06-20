@@ -1,0 +1,239 @@
+# depslib dependency file v1.0
+1750376444 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\main.cpp
+	"MenuBusquedas.h"
+	"MenuInscripciones.h"
+	"Menus.h"
+	<iostream>
+	<cstring>
+
+1749159233 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\fecha.cpp
+	<iostream>
+	<cstdlib>
+	"Fecha.h"
+
+1749159233 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\fecha.h
+	<iostream>
+
+1750015991 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\persona.cpp
+	"Persona.h"
+	"iostream"
+	"cstring"
+	"string"
+
+1750015979 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\persona.h
+	<iostream>
+	"cstring"
+	"string"
+	"Fecha.h"
+
+1750256015 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\alumnomanager.cpp
+	"AlumnoManager.h"
+	<iostream>
+	<cstring>
+	<string>
+	<cstdio>
+
+1750254472 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\alumnomanager.h
+	"Persona.h"
+	"Alumno.h"
+	"ArchivoAlumno.h"
+	"string"
+
+1750015885 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\alumno.h
+	"Persona.h"
+	<iostream>
+
+1750252379 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoalumno.h
+	"Alumno.h"
+	<iostream>
+	<string>
+
+1750254472 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\alumno.cpp
+	"Alumno.h"
+	<iostream>
+	<cstring>
+
+1749487222 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivopersona.cpp
+	<iostream>
+	<cstdlib>
+
+1750252379 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoalumno.cpp
+	"ArchivoAlumno.h"
+	<iostream>
+	<cstdlib>
+
+1749678680 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menubusquedas.cpp
+	"MenuBusquedas.h"
+	<iostream>
+
+1749678504 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menubusquedas.h
+	"MenuBusquedaAlumno.h"
+	<iostream>
+	<cstdlib>
+
+1750203997 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menubusquedaalumno.cpp
+	"MenuBusquedaAlumno.h"
+	<iostream>
+	<cstdlib>
+
+1749678504 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menubusquedaalumno.h
+	"AlumnoManager.h"
+	<iostream>
+
+1750372721 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\curso.cpp
+	"Curso.h"
+	<iostream>
+	<cstring>
+	<string>
+
+1750223144 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\curso.h
+	<iostream>
+	<cstring>
+	<string>
+
+1750372678 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\cursoarchivo.cpp
+	<cstdio>
+	<cstring>
+	"CursoArchivo.h"
+
+1750225995 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\cursoarchivo.h
+	"Curso.h"
+
+1750216361 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menuinscripciones.h
+	<iostream>
+
+1750371975 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menuinscripciones.cpp
+	"MenuInscripciones.h"
+	"InscripcionesManager.h"
+	<iostream>
+	<string>
+
+1750259752 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\inscripciones.cpp
+	"Alumno.h"
+	"inscripciones.h"
+	<iostream>
+	<cstring>
+
+1750259783 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\inscripciones.h
+	"AlumnoManager.h"
+	<iostream>
+	<string>
+
+1750375209 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\inscripcionesmanager.cpp
+	"InscripcionesManager.h"
+	<iostream>
+
+1750265822 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\inscripcionesmanager.h
+	"ArchivoInscripcion.h"
+	"inscripciones.h"
+	"Curso.h"
+	"CursoArchivo.h"
+	"Alumno.h"
+	"AlumnoManager.h"
+	<iostream>
+
+1750375194 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoinscripcion.h
+	"inscripciones.h"
+	<iostream>
+	<string>
+	<cstring>
+
+1750375194 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoinscripcion.cpp
+	"ArchivoInscripcion.h"
+	<iostream>
+	<string>
+
+1750013634 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\reinscripcion.cpp
+	"Reinscripcion.h"
+	<iostream>
+	<cstdlib>
+
+1750013634 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\reinscripcion.h
+	"InscripcionesManager.h"
+	"inscripciones.h"
+	"ArchivoInscripcion.h"
+	<iostream>
+
+1750220535 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\materia.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Materia.h"
+
+1750214703 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\materia.h
+	<iostream>
+	<cstring>
+
+1750286414 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\materiaarchivo.cpp
+	"MateriaArchivo.h"
+	<iostream>
+
+1750286014 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\materiaarchivo.h
+	"Materia.h"
+	<iostream>
+
+1750376573 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menus.cpp
+	"Menus.h"
+	<iostream>
+	<cstdlib>
+
+1750369029 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\menus.h
+	"MateriaArchivo.h"
+	"Materia.h"
+	"CursoArchivo.h"
+	"InscripcionesManager.h"
+	"AlumnoManager.h"
+	"ArchivoAlumno.h"
+	"Alumno.h"
+	"ProfesoresManager.h"
+	"ArchivoProfesores.h"
+	<iostream>
+
+1750366924 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoprofesores.cpp
+	"ArchivoProfesores.h"
+	<cstring>
+	<iostream>
+
+1750286056 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoprofesores.h
+	"Profesores.h"
+	"ArchivoProfesores.h"
+	<iostream>
+	<string>
+
+1750369226 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\profesores.h
+	"Persona.h"
+	<iostream>
+
+1750369226 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\profesores.cpp
+	"Profesores.h"
+	"Persona.h"
+	<iostream>
+	<cstring>
+
+1750376444 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\profesoresmanager.h
+	"Profesores.h"
+	"ArchivoProfesores.h"
+	"MateriaArchivo.h"
+
+1750376444 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\profesoresmanager.cpp
+	"ProfesoresManager.h"
+	<iostream>
+	<cstring>
+	<string>
+
+1750368697 source:c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoprofesoresxcurso.cpp
+	"ProfesoresXCurso.h"
+	"ArchivoProfesoresxCurso.h"
+	<cstring>
+	<iostream>
+	<cstdlib>
+
+1750367376 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\profesoresxcurso.h
+	<iostream>
+	<string>
+
+1750368592 c:\users\franc\onedrive\escritorio\programacion 2\sistema_gestion\admin_colegio\archivoprofesoresxcurso.h
+	"ProfesoresxCurso.h"
+	<iostream>
+	<string>
+

@@ -1,15 +1,16 @@
-#include"Profesores.h"
-#include"ArchivoProfesores.h"
+#include "ArchivoProfesores.h"
 #include <cstring>
 #include<iostream>
-#include<cstdlib>
 
 
-ArchivoProfesores::ArchivoProfesores(const char *nombre){
+
+ArchivoProfesores::ArchivoProfesores(){
+    const char *nombre= "Profesores.dat";
     strcpy(_nombreArchivo,nombre);
     _nombreArchivo[29] = '\0';
     _tamanioRegistro = sizeof(Profesores);
 }
+
 int ArchivoProfesores::CantidadRegistros(){
     FILE *pProfesores;
     pProfesores = fopen(_nombreArchivo,"rb");
@@ -23,7 +24,7 @@ int ArchivoProfesores::CantidadRegistros(){
     return CantidadRegistros;
 }
 
-bool ArchivoProfesores::agregarProfesor(Profesores reg){
+bool ArchivoProfesores::agregarProfesor(const Profesores &reg){
     int escribio;
     FILE *pProfesor;
     pProfesor = fopen(_nombreArchivo,"ab");
@@ -88,7 +89,7 @@ void ArchivoProfesores::listarProfesorEspecifico(Profesores registro){
     fclose(pProfesor);
 }
 
-int ArchivoProfesores::buscarProfesor(string dni){
+int ArchivoProfesores::buscarProfesorXDni(int dni){
      Profesores reg;
     int posicion=0;
 
@@ -159,7 +160,7 @@ Profesores ArchivoProfesores::leerProfesor(int pos){
         return Profesores();
     }
     Profesores reg;
-    fseek(pArchivo,_tamanioRegistro*pos,SEEK_END);
+    fseek(pArchivo,_tamanioRegistro*pos,SEEK_SET);
     fread(&reg,_tamanioRegistro,1,pArchivo);
 
     fclose(pArchivo);
@@ -170,7 +171,7 @@ bool ArchivoProfesores::modificarProfesor(const Profesores &reg, int pos){
     FILE *pArchivo;
     pArchivo = fopen(_nombreArchivo,"rb+");
     if(pArchivo==nullptr){
-        return -1;
+        return 0;
     }
     fseek(pArchivo,pos*_tamanioRegistro,0);
     bool escribio = fwrite(&reg,_tamanioRegistro,1,pArchivo);
@@ -179,7 +180,7 @@ bool ArchivoProfesores::modificarProfesor(const Profesores &reg, int pos){
     return escribio;
 }
 
-bool ArchivoProfesores::bajaLogica(string dni){
+bool ArchivoProfesores::bajaLogica(int dni){
     Profesores reg;
     ArchivoProfesores archi;
     int pos=archi.buscarProfesor(dni);
@@ -189,7 +190,7 @@ bool ArchivoProfesores::bajaLogica(string dni){
     return archi.modificarProfesor(reg,pos);
 }
 
-bool ArchivoProfesores::altaLogica(string dni){
+bool ArchivoProfesores::altaLogica(int dni){
     Profesores reg;
     ArchivoProfesores archi;
     int pos=archi.buscarProfesor(dni);

@@ -11,20 +11,24 @@ inscripcion::inscripcion()
     _idInscripcion = 0;
     _legajoAlumno=0;
     _idCurso=0;
+    _nivelEducativo=0;
+    _anioEducativo = 0;
     _importeMatricula=0.0;
     _adeudaMatricula=false;
     _estado = false;
 }
 
 
-inscripcion::inscripcion(int idInscripcion,int legajoAlumno,int id,  int numeroCurso, float importeMatricula, bool adeudaMatricula,bool estado,Fecha fechaInscripcion){
+inscripcion::inscripcion(int idInscripcion,int legajoAlumno,int id, bool nivel, int anio, float importeMatricula, bool adeudaMatricula,bool estado,Fecha fechaInscripcion){
 
-  _idInscripcion = idInscripcion;
-  _legajoAlumno=legajoAlumno;
-  _idCurso = id;
-  _importeMatricula=importeMatricula;
-  _adeudaMatricula=adeudaMatricula;
-  _estado = estado;
+  setIdInscripcion(idInscripcion);
+  setlegajoAlumno(legajoAlumno);
+  setIdCurso(id);
+  setNivel(nivel);
+  setANio(anio);
+  setimporteMatricula(importeMatricula);
+  setEstado(estado);
+  setfechaInscripcion(fechaInscripcion);
 }
 
 void inscripcion::setIdInscripcion(int idInscripcion){
@@ -39,6 +43,12 @@ void inscripcion::setlegajoAlumno(int legajoAlumno){
 void inscripcion::setIdCurso(int id){
 
     _idCurso =id;
+}
+void inscripcion::setNivel(bool nivel){
+    _nivelEducativo = nivel;
+}
+void inscripcion::setANio(int anio){
+    _anioEducativo = anio;
 }
 
 void inscripcion::setimporteMatricula(float importeMatricula){
@@ -75,6 +85,12 @@ int inscripcion::getIdCurso(){
    return _idCurso;
 }
 
+bool  inscripcion::getNivel(){
+    return _nivelEducativo;
+}
+int inscripcion::getANio(){
+    return _anioEducativo;
+}
 float inscripcion::getimporteMatricula(){
     return _importeMatricula;
 
@@ -94,18 +110,25 @@ Fecha inscripcion::getfechaInscripcion(){
 }
 
 void inscripcion::Mostrar(){
-   cout<<"Id de inscripcion: " <<_idInscripcion<<endl;
-   cout<< "legajo del Alumno: " <<_legajoAlumno << endl;
-   cout<< "Id de Curso: "<< _idCurso << endl;
-   cout<< "Importe de Matricula: "<< _importeMatricula << endl;
-    if(_adeudaMatricula == 1){
+   cout<<"ID DE INSCRIPCION: #" <<_idInscripcion<<endl;
+   cout<< "LEGAJO ALUMNO: " <<_legajoAlumno << endl;
+   cout<< "ID DE CURSO: "<< _idCurso << endl;
+   cout<< "IMPORTE DE MATRICULA: "<< _importeMatricula << endl;
+    if(_adeudaMatricula == 0){
 
-    cout<<"El alumno no adeuda la matricula"<< endl;
+    cout<<"*El alumno no adeuda la matricula*"<< endl;
     }
     else {
     cout<<"El alumno adeuda la matricula"<< endl;
     }
-    cout<<"Estado: "<<_estado;
-    cout<<"Fecha de inscripcion: ";
+
+    cout<<"ESTADO: ";
+    if(_estado== true){
+        cout<<"ACTIVO"<<endl;
+    }else{
+        cout<<"INACTVO"<<endl;
+    }
+
+    cout<<"FECHA DE INSCRIPCION: ";
     _fechaInscripcion.Mostrar();
 }
